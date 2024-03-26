@@ -1,0 +1,33 @@
+#!/usr/bin/env zsh
+
+addToPath() {
+    if [[ "$PATH" != *"$1"* ]]; then
+	export PATH=$PATH:$1
+    fi
+}
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+	export PATH=$1:$PATH
+    fi
+}
+
+# Stands for Open Project
+op() {
+    projects_path=$HOME/projects
+    project=$(find $projects_path -maxdepth 1 -not -path $projects_path | fzf)
+    if [ ! -z "$project" ]
+    then
+	name=$(basename ${project})
+	tmux new -s $name -c $project
+    fi
+}
+
+# Edit dotfiles config
+conf() {
+    target=$((find $XDG_CONFIG_HOME -type f ; find $HOME -maxdepth 1 -type f) | fzf)
+    if [ ! -z "$target" ]
+    then
+	$VIM $target 
+    fi
+}
