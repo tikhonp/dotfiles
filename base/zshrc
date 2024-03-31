@@ -1,12 +1,3 @@
-LANG="en_US.UTF-8"
-LC_COLLATE="en_US.UTF-8"
-LC_CTYPE="en_US.UTF-8"
-LC_MESSAGES="en_US.UTF-8"
-LC_MONETARY="en_US.UTF-8"
-LC_NUMERIC="en_US.UTF-8"
-LC_TIME="en_US.UTF-8"
-LC_ALL="en_US.UTF-8"
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -109,21 +100,39 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-source ~/.zsh_profile
+export XDG_CONFIG_HOME=$HOME/.config
+VIM="nvim"
+
+PERSONAL=$XDG_CONFIG_HOME/personal
+source $PERSONAL/env
+for i in `find -L $PERSONAL`; do
+    source $i
+done
+
+eval "$(fzf --zsh)"
+
+export GIT_EDITOR=$VIM
+export GOPATH=$HOME/go
+
+addToPathFront $HOME/go/bin
 
 setupConda() {
+	# >>> conda initialize >>>
 	# !! Contents within this block are managed by 'conda init' !!
-	__conda_setup="$('/Users/tikhon/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+	__conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 	if [ $? -eq 0 ]; then
 	    eval "$__conda_setup"
 	else
-	    if [ -f "/Users/tikhon/anaconda3/etc/profile.d/conda.sh" ]; then
-		. "/Users/tikhon/anaconda3/etc/profile.d/conda.sh"
+	    if [ -f "/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+		. "/opt/anaconda3/etc/profile.d/conda.sh"
 	    else
-		export PATH="/Users/tikhon/anaconda3/bin:$PATH"
+		export PATH="/opt/anaconda3/bin:$PATH"
 	    fi
 	fi
 	unset __conda_setup
+	# <<< conda initialize <<<
 }
 
 addToPath "/opt/homebrew/opt/postgresql@16/bin"
+
+setupConda

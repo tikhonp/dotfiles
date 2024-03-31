@@ -2,24 +2,23 @@
 
 addToPath() {
     if [[ "$PATH" != *"$1"* ]]; then
-	export PATH=$PATH:$1
+        export PATH=$PATH:$1
     fi
 }
 
 addToPathFront() {
     if [[ "$PATH" != *"$1"* ]]; then
-	export PATH=$1:$PATH
+        export PATH=$1:$PATH
     fi
 }
 
 # Stands for Open Project
 op() {
     projects_path=$HOME/projects
-    project=$(find $projects_path -maxdepth 1 -not -path $projects_path | fzf)
-    if [ ! -z "$project" ]
-    then
-	name=$(basename ${project})
-	tmux new -s $name -c $project
+    project=$(find $projects_path -maxdepth 1 -not -path $projects_path -type d | fzf)
+    if [ ! -z "$project" ]; then
+        name=$(basename ${project})
+        tmux new -s $name -c $project
     fi
 }
 
@@ -28,6 +27,27 @@ conf() {
     target=$((find $XDG_CONFIG_HOME -type f ; find $HOME -maxdepth 1 -type f) | fzf)
     if [ ! -z "$target" ]
     then
-	$VIM $target 
+        $VIM $target 
+    fi
+}
+
+# Connect ssh server from given list
+server() {
+    if [ -z "$PRIVATE_SSH_SERVERS_PATH" ]; then
+        echo "Error: PRIVATE_SSH_SERVERS_PATH is not set";
+        return 1;
+    fi
+    selected_server=$(cat $PRIVATE_SSH_SERVERS_PATH | fzf --height 20% --layout=reverse --border)
+    if [ ! -z "$selected_server" ]; then
+        ssh $selected_server
+    fi
+}
+alias s=server
+
+# Stands for Fuzzy find vIM 
+fim() {
+    selected_file=$(find . | fzf)
+    if [ ! -z "$selected_file" ]; then
+        $VIM $selected_file
     fi
 }

@@ -4,3 +4,4 @@ alias vi="$VIM"
 
 alias t="tmux a"
 alias c="clear"
+alias p="cd ~/projects/"
