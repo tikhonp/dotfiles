@@ -51,3 +51,7 @@ fim() {
         $VIM $selected_file
     fi
 }
+
+git_open() {
+    open $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )
+}

@@ -30,6 +30,8 @@ brew install neovim
 brew install fzf
 brew install go
 brew install tree
+brew install pkl
+brew install pgcli
 
 # 6. install dotfiles
 
