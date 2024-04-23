@@ -32,6 +32,8 @@ brew install go
 brew install tree
 brew install pkl
 brew install pgcli
+brew install swiftlint
+brew install getsentry/tools/sentry-cli
 
 # 6. install dotfiles
 
