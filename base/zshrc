@@ -115,6 +115,7 @@ export GIT_EDITOR=$VIM
 export GOPATH=$HOME/go
 
 addToPathFront $HOME/go/bin
+addToPathFront $HOME/.local/bin
 
 setupConda() {
 	# >>> conda initialize >>>
