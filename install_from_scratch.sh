@@ -34,6 +34,7 @@ brew install pkl
 brew install pgcli
 brew install swiftlint
 brew install getsentry/tools/sentry-cli
+brew install thefuck
 
 # 6. install dotfiles
 

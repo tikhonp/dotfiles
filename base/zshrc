@@ -137,3 +137,5 @@ setupConda() {
 addToPath "/opt/homebrew/opt/postgresql@16/bin"
 
 setupConda
+
+eval $(thefuck --alias)
