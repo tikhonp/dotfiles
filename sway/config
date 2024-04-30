@@ -15,10 +15,16 @@ bindsym $mod+d exec $menu
 
 # FUNCTION buttons control
 
-# set $alsa_control amixer set Master
-# bindsym XF86AudioMute exec pactl set-sink-mute $alsa_control toggle
-# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86Search exec $menu
+
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+set $alsa_control amixer set Master
+bindsym --locked XF86AudioMute exec $alsa_control toggle
+bindsym --locked XF86AudioRaiseVolume exec $alsa_control 2%+
+bindsym --locked XF86AudioLowerVolume exec $alsa_control 2%-
 
 
 # MacOS-like keybindings
@@ -60,6 +66,11 @@ input "1452:641:Apple_Internal_Keyboard_/_Trackpad" {
     scroll_method two_finger    # none|two_finger|edge|on_button_down
     middle_emulation enabled    # Enables middle click
     tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
+}
+input type:keyboard {
+    repeat_rate 45
+    repeat_delay 500
+    xkb_options compose:ralt
 }
 
 ### Key bindings
