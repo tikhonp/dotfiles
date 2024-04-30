@@ -28,5 +28,14 @@ else
     volume_string="Volume: Muted"
 fi
 
+playing_status=$(playerctl status)
+if [ $playing_status ] && [ "$playing_status" != "No players found" ]; then
+    playing_artist=$(playerctl metadata artist)
+    playing_title=$(playerctl metadata title)
+    playing_string="$playing_status: $playing_artist - $playing_title |"
+else
+    playing_string=""
+fi
+
 # Status bar
-echo $volume_string "|" $wifi_string "|" $battery_string "|" $date_string
+echo $playing_string $volume_string "|" $wifi_string "|" $battery_string "|" $date_string
