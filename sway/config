@@ -13,6 +13,14 @@ set $menu exec $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /home/t
 bindsym $mod+d exec $menu
 
 
+# FUNCTION buttons control
+
+# set $alsa_control amixer set Master
+# bindsym XF86AudioMute exec pactl set-sink-mute $alsa_control toggle
+# bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+# bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+
+
 # MacOS-like keybindings
 # You need to have 'wtype' installed 
 
@@ -20,7 +28,6 @@ bindsym --to-code $mod+x exec wtype -M shift -P delete
 bindsym --to-code $mod+c exec wtype -M ctrl -P insert
 bindsym --to-code $mod+v exec wtype -M shift -P insert
 
-bindsym --to-code $mod+f exec wtype -M ctrl -P f
 bindsym --to-code $mod+p exec wtype -M ctrl -P p
 bindsym --to-code $mod+t exec wtype -M ctrl -P t
 bindsym --to-code $mod+w exec wtype -M ctrl -P w
@@ -38,13 +45,9 @@ output "Unknown Unknown Unknown" {
 
 ### Idle configuration
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
+         timeout 120 'swaylock -f -c 000000' \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
 
 ### Input configuration
 input "1452:641:Apple_Internal_Keyboard_/_Trackpad" {
@@ -214,7 +217,7 @@ bar {
 
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
-    status_command while date +'%d %b %k:%M '; do sleep 30; done
+    status_command while $HOME/.config/sway/status.sh; do sleep 1; done
 
     colors {
         statusline #ffffff
