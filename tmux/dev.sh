@@ -6,5 +6,5 @@ then
     exit 1;
 fi
 
-rm -rf $XDG_CONFIG_HOME/tmux
-ln -s $(pwd) $XDG_CONFIG_HOME/tmux
+rm -rf "$XDG_CONFIG_HOME"/tmux
+ln -s "$(pwd)" "$XDG_CONFIG_HOME"/tmux

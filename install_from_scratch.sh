@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 # 0. Install theme (or from dotfiles)
 curl https://raw.githubusercontent.com/sidnvy/gruvbox-terminal/master/gruvbox-dark.terminal -o gruvbox-dark.terminal
 
@@ -15,10 +17,7 @@ ssh-keygen -t ed25519 -C ""
 pbcopy < ~/.ssh/id_ed25519.pub
 # add it to github account: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
 
-git config --global gpg.format ssh
-git config --global user.signingkey ~/.ssh/id_ed25519.pub
-git config --global user.name "TikhonP"
-git config --global user.email ""
+# copy gitconfig file
 
 # 5. clone dotfiles
 git clone git@github.com:TikhonP/dotfiles.git

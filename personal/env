@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 addToPath() {
     if [[ "$PATH" != *"$1"* ]]; then
@@ -18,7 +18,7 @@ op() {
         selected=$1
     else
         projects_path=$HOME/projects
-        selected=$(find $projects_path -maxdepth 1 -not -path $projects_path -type d | fzf)
+        selected=$(find "$projects_path" -maxdepth 1 -not -path "$projects_path" -type d | fzf)
     fi
 
     if [[ -z $selected ]]; then
@@ -31,7 +31,7 @@ op() {
     echo "$selected_name and $tmux_running, $TMUX"
 
     if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-        tmux new-session -s $selected_name -c $selected
+        tmux new-session -s "$selected_name" -c "$selected"
         exit 0
     fi
 
@@ -39,19 +39,19 @@ op() {
         tmux a
     fi
 
-    if ! tmux has-session -t=$selected_name 2> /dev/null; then
-        tmux new-session -ds $selected_name -c $selected
+    if ! tmux has-session -t="$selected_name" 2> /dev/null; then
+        tmux new-session -ds "$selected_name" -c "$selected"
     fi
 
-    tmux switch-client -t $selected_name
+    tmux switch-client -t "$selected_name"
 }
 
 # Edit dotfiles config
 conf() {
-    target=$((find $XDG_CONFIG_HOME -type f ; find $HOME -maxdepth 1 -type f) | fzf)
-    if [ ! -z "$target" ]
+    target=$( (find "$XDG_CONFIG_HOME" -type f ; find "$HOME" -maxdepth 1 -type f) | fzf)
+    if [ -n "$target" ]
     then
-        $VIM $target 
+        $VIM "$target" 
     fi
 }
 
@@ -61,9 +61,9 @@ server() {
         echo "Error: PRIVATE_SSH_SERVERS_PATH is not set";
         return 1;
     fi
-    selected_server=$(cat $PRIVATE_SSH_SERVERS_PATH | fzf --height 20% --layout=reverse --border)
-    if [ ! -z "$selected_server" ]; then
-        ssh $selected_server
+    selected_server=$(fzf --height 20% --layout=reverse --border < "$PRIVATE_SSH_SERVERS_PATH")
+    if [ -n "$selected_server" ]; then
+        ssh "$selected_server"
     fi
 }
 alias s=server
@@ -71,11 +71,23 @@ alias s=server
 # Stands for Fuzzy find vIM 
 fim() {
     selected_file=$(find . | fzf)
-    if [ ! -z "$selected_file" ]; then
-        $VIM $selected_file
+    if [ -n "$selected_file" ]; then
+        $VIM "$selected_file"
     fi
 }
 
 git_open() {
-    open $(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )
+    url=$(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )
+    if [ -z "$url" ]; then
+        echo "Error: Not a git repository"
+        return 1
+    fi
+    if command -v xdg-open &> /dev/null; then
+        xdg-open "$url"
+    elif command -v open &> /dev/null; then
+        open "$url"
+    else
+        echo "Error: No command to open browser"
+        return 1
+    fi
 }

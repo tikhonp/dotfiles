@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 # Date
 date_string=$(date +'%d %b %k:%M')
@@ -32,16 +32,16 @@ else
 fi
 
 playing_status=$(playerctl status)
-if [ $playing_status ] && [ "$playing_status" != "No players found" ]; then
+if [ "$playing_status" ] && [ "$playing_status" != "No players found" ]; then
 
     # get sample rate
-    headphones_running=$(cat /proc/asound/card0/pcm0p/sub0/status | grep RUNNING | tr -d ' ')
-    speakers_running=$(cat /proc/asound/card0/pcm1p/sub0/status | grep RUNNING | tr -d ' ')
+    headphones_running=$(grep RUNNING /proc/asound/card0/pcm0p/sub0/status | tr -d ' ')
+    speakers_running=$(grep RUNNING /proc/asound/card0/pcm1p/sub0/status | tr -d ' ')
     if [[ $headphones_running != "" ]]; then
-        raw_sample_rate=$(cat /proc/asound/card0/pcm0p/sub0/hw_params | grep rate | awk '{print $2}')
+        raw_sample_rate=$(grep rate /proc/asound/card0/pcm0p/sub0/hw_params | awk '{print $2}')
         sample_rate="$(bc <<< "scale=1; $raw_sample_rate / 1000" | sed 's/\.0$//')kHz "
     elif [[ $speakers_running != "" ]]; then
-        raw_sample_rate=$(cat /proc/asound/card0/pcm1p/sub0/hw_params | grep rate | awk '{print $2}')
+        raw_sample_rate=$(grep rate /proc/asound/card0/pcm1p/sub0/hw_params | awk '{print $2}')
         sample_rate="$(bc <<< "scale=1; $raw_sample_rate / 1000" | sed 's/\.0$//')kHz "
     else
         sample_rate=""
@@ -55,4 +55,4 @@ else
 fi
 
 # Status bar
-echo $playing_string $volume_string "|" $wifi_string "|" $battery_string "|" $layout "|" $date_string
+echo "$playing_string" "$volume_string" "|" "$wifi_string" "|" "$battery_string" "|" "$layout" "|" "$date_string"

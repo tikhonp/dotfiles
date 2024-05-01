@@ -6,5 +6,5 @@ then
     exit 1;
 fi
 
-rm -rf $XDG_CONFIG_HOME/sway
-ln -s $(pwd) $XDG_CONFIG_HOME/sway
+rm -rf "$XDG_CONFIG_HOME"/sway
+ln -s "$(pwd)" "$XDG_CONFIG_HOME"/sway

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-alias vim="$VIM"
-alias vi="$VIM"
+alias vim='$VIM'
+alias vi='$VIM'
 
 alias t="tmux a"
 alias c="clear"

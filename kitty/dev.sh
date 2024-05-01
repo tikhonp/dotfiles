@@ -6,5 +6,5 @@ then
     exit 1;
 fi
 
-rm -rf $XDG_CONFIG_HOME/kitty
-ln -s $(pwd) $XDG_CONFIG_HOME/kitty
+rm -rf "$XDG_CONFIG_HOME"/kitty
+ln -s "$(pwd)" "$XDG_CONFIG_HOME"/kitty
