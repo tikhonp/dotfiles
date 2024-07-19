@@ -36,6 +36,8 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym --locked XF86AudioMute exec amixer set Master toggle
 bindsym --locked XF86AudioRaiseVolume exec amixer set Master 2%+
 bindsym --locked XF86AudioLowerVolume exec amixer set Master 2%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 10%-
 
 
 # MacOS-like keybindings
@@ -67,7 +69,7 @@ exec swayidle -w \
 
 
 ### Output configuration
-    output * bg #000000 solid_color
+output * bg #000000 solid_color
 
 
 ### Input configuration
