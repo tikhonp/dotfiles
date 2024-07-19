@@ -2,3 +2,4 @@
 
 addToPath /usr/local/go/bin
 addToPath "$GOPATH"/bin
+addToPath "$HOME"/development/flutter/bin
