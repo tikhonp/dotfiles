@@ -45,6 +45,7 @@ op() {
 
     tmux switch-client -t "$selected_name"
 }
+bindkey -s "^f" "op\n"
 
 # Edit dotfiles config
 conf() {
@@ -91,3 +92,4 @@ git_open() {
         return 1
     fi
 }
+
