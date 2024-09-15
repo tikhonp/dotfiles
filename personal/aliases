@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 alias vim='$VIM'
 alias vi='$VIM'
@@ -8,5 +8,12 @@ alias c="clear"
 alias p="cd ~/projects/"
 alias ssh="kitten ssh "
 alias f="fuck"
+alias s=server
 
 alias msync="rsync -rvaE --progress --delete"
+
+alias ls='ls --color '
+alias l='ls -lFh '   
+alias la='ls -lAFh '
+alias ll='ls -l '
+
