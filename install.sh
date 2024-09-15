@@ -15,3 +15,4 @@ export DOTFILES_OLD_CONFS_PATH=$HOME/old_dotfiles
 for d in */ ; do 
    install "$d" 
 done
+

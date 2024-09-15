@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 
-# 0. Install theme (or from dotfiles)
-curl https://raw.githubusercontent.com/sidnvy/gruvbox-terminal/master/gruvbox-dark.terminal -o gruvbox-dark.terminal
-
 # 1. xcode-select --install
 
 # 2. Install Homebrew
 
 # 3. create ~/projects folder
 
-# 4. install omzsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# generate ssh key
+# 4. generate ssh key
 ssh-keygen -t ed25519 -C ""
 pbcopy < ~/.ssh/id_ed25519.pub
 # add it to github account: https://docs.github.com/en/authentication/connecting-to-github-with-ssh
@@ -46,3 +40,4 @@ brew install --cask outline
 brew install --cask transmission
 brew install --cask numi
 brew install --cask discord
+
