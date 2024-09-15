@@ -1,8 +1,0 @@
-#!/usr/bin/env zsh
-
-bindkey -e
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
-bindkey '^y' autosuggest-accept
-bindkey -s "^f" "op\n"
-
