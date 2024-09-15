@@ -1,0 +1,6 @@
+#!/usr/bin/env zsh
+
+addToPath "$GOPATH"/bin
+addToPath "$HOME"/Library/Android/sdk/platform-tools/adb
+addToPath "/opt/homebrew/opt/gradle@6/bin"
+

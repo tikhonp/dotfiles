@@ -1,0 +1,18 @@
+[gpg]
+	format = ssh
+[user]
+	signingkey = /Users/tikhon/.ssh/id_ed25519.pub
+	name = TikhonP
+	email = tikhon.petrishchev@gmail.com
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[alias]
+	open = !git_open
+[pull]
+	ff = only
+[core]
+	ignorecase = false
+[gpg "ssh"]
+	allowedSignersFile = /Users/tikhon/.ssh/allowed_signers

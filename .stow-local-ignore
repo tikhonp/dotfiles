@@ -1,0 +1,9 @@
+\.git
+\.gitignore
+\.gitmodules
+
+^/README.*
+^/.DS_Store*
+
+me.jpg
+
