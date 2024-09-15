@@ -17,3 +17,5 @@ alias l='ls -lFh '
 alias la='ls -lAFh '
 alias ll='ls -l '
 
+alias icat='kitty icat '
+
