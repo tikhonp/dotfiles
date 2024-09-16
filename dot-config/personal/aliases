@@ -6,7 +6,6 @@ alias vi='$VIM'
 alias t="tmux a"
 alias c="clear"
 alias p="cd ~/projects/"
-alias ssh="kitten ssh "
 alias f="fuck"
 alias s=server
 
