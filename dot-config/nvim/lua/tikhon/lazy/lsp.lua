@@ -64,8 +64,7 @@ return {
         )
 
         local default_setup = function(server)
-            local server_name = server == 'tsserver' and 'ts_ls' or server
-            lspconfig[server_name].setup({
+            lspconfig[server].setup({
                 capabilities = capabilities,
             })
         end
@@ -80,7 +79,7 @@ return {
                 "html",
                 "tailwindcss",
                 "pylsp",
-                "tsserver",
+                "ts_ls",
                 "bashls",
                 "clangd",
             },
@@ -160,3 +159,4 @@ return {
         }
     end,
 }
+

@@ -22,16 +22,14 @@ return {
 
         vim.keymap.set("n", "<leader>rsj", function()
             vim.g.vrc_body_preprocessor = "jq -c ."
-            print("vrc_body_preprocessor set to JSON")
+            vim.notify("[Rest Console] vrc_body_preprocessor set to JSON")
         end, { desc = "[R]est [S]et [J]son vrc_body_preprocessor" })
 
         vim.keymap.set("n", "<leader>ruj", function()
             vim.g.vrc_body_preprocessor = ""
-            print("vrc_body_preprocessor set to NULL")
+            vim.notify("[Rest Console] vrc_body_preprocessor set to NULL")
         end, { desc = "[R]est [U]nset [J]son vrc_body_preprocessor" })
-
-        -- Set json body preproccessor by default
-        -- vim.g.vrc_body_preprocessor = "jq -c ."
     end
 
 }
+
