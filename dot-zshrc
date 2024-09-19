@@ -7,6 +7,7 @@ export GIT_EDITOR=$VIM
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"
+  FPATH="/opt/homebrew/share/zsh/site-functions:${FPATH}"
 fi
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -32,9 +33,6 @@ zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
-
-autoload -Uz compinit && compinit
-zinit cdreplay -q
 
 # History
 HISTSIZE=5000
@@ -63,4 +61,7 @@ source $XDG_CONFIG_HOME/personal/aliases
 source $XDG_CONFIG_HOME/personal/paths
 source $XDG_CONFIG_HOME/personal/other_eval_trash
 source $XDG_CONFIG_HOME/local/secrets
+
+autoload -Uz compinit && compinit
+zinit cdreplay -q
 
