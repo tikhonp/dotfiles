@@ -16,10 +16,6 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear highlight on
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected visual block one line down" })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected visual block one line up" })
 
-vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
-end, { desc = "Resource nvim confing" })
-
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Stay cursor in place while jumping" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Stay cursor in place while jumping" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Also stay cursor in middle while search jumps" })

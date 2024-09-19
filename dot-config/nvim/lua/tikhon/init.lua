@@ -4,7 +4,16 @@ require("tikhon.set")
 require("tikhon.remap")
 require("tikhon.lazy_init")
 
-local custom_format = function()
+local add_newline_at_end = function()
+    local n_lines = vim.api.nvim_buf_line_count(0)
+    local last_nonblank = vim.fn.prevnonblank(n_lines)
+    if last_nonblank <= n_lines then
+        vim.api.nvim_buf_set_lines(0,
+            last_nonblank, n_lines, true, { '' })
+    end
+end
+
+local lsp_buf_format = function()
     if vim.bo.filetype == "templ" then
         local bufnr = vim.api.nvim_get_current_buf()
         local filename = vim.api.nvim_buf_get_name(bufnr)
@@ -20,6 +29,7 @@ local custom_format = function()
     else
         vim.lsp.buf.format()
     end
+    add_newline_at_end()
 end
 
 
@@ -49,7 +59,7 @@ autocmd("LspAttach", {
             group = format_on_save_group,
             buffer = e.buf,
             callback = function()
-                custom_format()
+                lsp_buf_format()
             end,
         })
 
@@ -61,29 +71,13 @@ autocmd("LspAttach", {
         vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
         vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
         vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>f", custom_format, { desc = "Format current buffer" })
+        vim.keymap.set("n", "<leader>f", lsp_buf_format, { desc = "Format current buffer" })
 
         vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
     end
 })
-
-
-local newline_on_save = augroup("NewlineOnSave", {})
-autocmd("BufWritePre", {
-    group = newline_on_save,
-    pattern = '*',
-    callback = function()
-        local n_lines = vim.api.nvim_buf_line_count(0)
-        local last_nonblank = vim.fn.prevnonblank(n_lines)
-        if last_nonblank <= n_lines then
-            vim.api.nvim_buf_set_lines(0,
-                last_nonblank, n_lines, true, { '' })
-        end
-    end,
-})
-
 
 vim.g.netrw_bufsettings = "noma nomod nu nowrap ro nobl"
 vim.g.netrw_banner = 0
