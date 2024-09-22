@@ -26,3 +26,4 @@ export NVM_DIR="$HOME/.nvm"
 
 source $HOME/.cargo/env
 
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"

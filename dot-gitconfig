@@ -11,7 +11,8 @@
 [tag]
 	gpgsign = true
 [alias]
-	open = !git_open
+	open = "!$XDG_CONFIG_HOME/personal/scripts/git_open.sh"
+	linecount = !git ls-files -z | xargs -0 wc -l
 [pull]
 	ff = only
 [core]

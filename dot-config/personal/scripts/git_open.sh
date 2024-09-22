@@ -1,0 +1,16 @@
+#!/usr/bin/env zsh
+
+url=$(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )
+if [ -z "$url" ]; then
+    echo "Error: Not a git repository"
+    return 1
+fi
+if command -v xdg-open &> /dev/null; then
+    xdg-open "$url"
+elif command -v open &> /dev/null; then
+    open "$url"
+else
+    echo "Error: No command to open browser"
+    return 1
+fi
+
