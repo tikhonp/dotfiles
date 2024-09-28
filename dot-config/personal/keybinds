@@ -5,4 +5,5 @@ bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^y' autosuggest-accept
 bindkey -s "^f" "op\n"
+bindkey -s "^o" "cd ..\n"
 

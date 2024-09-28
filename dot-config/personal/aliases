@@ -12,9 +12,8 @@ alias s=server
 alias msync="rsync -rvaE --progress --delete"
 
 alias ls='ls --color '
-alias l='ls -lFh '   
-alias la='ls -lAFh '
-alias ll='ls -lh '
+alias l='ls -lh '   
+alias la='ls -lAh '
 
 alias icat='kitty icat '
 
