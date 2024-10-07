@@ -13,6 +13,7 @@
 [alias]
 	open = "!$XDG_CONFIG_HOME/personal/scripts/git_open.sh"
 	linecount = !git ls-files -z | xargs -0 wc -l
+	gigapush = !git remote | xargs -L1 git push --all --follow-tags
 [pull]
 	ff = only
 [core]
