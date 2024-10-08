@@ -52,6 +52,8 @@ brew "yt-dlp"
 # Sentry command-line client for some generic tasks
 brew "getsentry/tools/sentry-cli"
 
+brew "cowsay"
+
 cask "appcleaner"
 cask "discord"
 cask "firefox"
