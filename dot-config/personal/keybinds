@@ -1,9 +1,13 @@
 #!/usr/bin/env zsh
 
-bindkey -e
+bindkey -e # emacs keybinds if i need ^A, ^E, etc
+
+bindkey -v # vi keybinds
+bindkey "^H" backward-delete-char # fix backspace after vi keybinds
+bindkey "^?" backward-delete-char # fix backspace after vi keybinds
+
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^y' autosuggest-accept
 bindkey -s "^f" "op\n"
 bindkey -s "^o" "cd ..\n"
-

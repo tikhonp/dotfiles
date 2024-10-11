@@ -16,6 +16,7 @@
 	gigapush = !git remote | xargs -L1 git push --all --follow-tags
     hub = !echo 'Difference between git and GitHub is like between porn and PornHub' | cowsay
     lab = !echo 'Difference between git and GitLab is like between porn and PornoLab' | cowsay
+    vim = !nvim +Git
 [pull]
 	ff = only
 [core]
