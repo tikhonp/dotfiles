@@ -29,3 +29,6 @@ source $HOME/.cargo/env
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 fpath=(~/.docker/completions \\$fpath)
+
+export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin
+export IDF_PATH=~/esp/ESP8266_RTOS_SDK
