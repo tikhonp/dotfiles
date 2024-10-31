@@ -1,1 +1,4 @@
 *.DS_Store
+
+dot-shadowsocksx-ng/*
+!dot-shadowsocksx-ng/user-rule.txt

@@ -1,0 +1,4 @@
+# vim:set ft=yaml:
+
+BasedOnStyle: LLVM
+IndentWidth: 4
