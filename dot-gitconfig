@@ -11,7 +11,7 @@
 [tag]
 	gpgsign = true
 [alias]
-	open = "!$XDG_CONFIG_HOME/personal/scripts/git_open.sh"
+	open = "!$XDG_CONFIG_HOME/personal/scripts/git-open"
 	linecount = !git grep --cached -zIl '' | xargs -0 wc -l | sort
 	gigapush = !git remote | xargs -L1 git push --follow-tags
     hub = !echo 'Difference between git and GitHub is like between porn and PornHub' | cowsay
