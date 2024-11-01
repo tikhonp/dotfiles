@@ -3,7 +3,7 @@
 \.gitmodules
 
 ^/README.*
-^/.DS_Store*
+.DS_Store
 
 me.jpg
 Brewfile
