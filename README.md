@@ -40,6 +40,7 @@ pbcopy < ~/.ssh/id_ed25519.pub
 
 ```zsh
 # Use SSH (if set up)...
+# and clone included nvim dir somehow...
 git clone git@github.com:TikhonP/dotfiles.git
 
 # ...or use HTTPS and switch remotes later.
@@ -49,6 +50,8 @@ git clone https://github.com/TikhonP/dotfiles.git
 6. Create symlinks in the Home directory to the real files in the repo.
 
 ```zsh
+mkdir ~/.config # so not all dot-config will not symlinked
+
 stow --target=$HOME . --dotfiles
 ```
 
