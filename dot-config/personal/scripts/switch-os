@@ -1,17 +1,13 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    echo 'Switching to Mac OS...'
-    sudo asahi-bless -n --set-boot-macos -y; reboot;
+    echo 'Switching to Mac OS...';
+    sudo asahi-bless -n --set-boot-macos -y && reboot;
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-    echo 'Switching to Asahi...'
-    mkfifo passwordpipe
-    sudo bless --mount "/Volumes/Macintosh HD" --setBoot < passwordpipe &
-    echo "fakepassword" > passwordpipe #this seems weird but actually works
-    rm passwordpipe;
-    sudo reboot;
+    echo 'Switching to Asahi...';
+    sudo bless --mount "/Volumes/asahi" --setBoot && reboot;
 else
-    echo 'Error: Unsupported platform';
+    echo "Error: Unsupported platform $OSTYPE";
     exit 1;
 fi
 
