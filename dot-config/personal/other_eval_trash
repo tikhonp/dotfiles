@@ -24,13 +24,17 @@ export NVM_DIR="$HOME/.nvm"
 
 [[ -f /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh ]] && . /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh || true
 
-# source $HOME/.cargo/env
+if [ -d "$HOME/.cargo" ]; then
+    source $HOME/.cargo/env
+fi
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 
 fpath=(~/.docker/completions \\$fpath)
 
-DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+fi
 
 # export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin
 # export IDF_PATH=~/esp/ESP8266_RTOS_SDK

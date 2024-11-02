@@ -6,7 +6,7 @@ set $up k
 set $right l
 
 # Kitty for terminal
-set $term /home/tikhon/.local/bin/kitty 
+set $term /usr/bin/kitty
 set $term_cwd $term --working-directory "$(swaycwd 2>/dev/null || echo $HOME)"
 
 # Launcher sway-launcher-desktop
@@ -73,7 +73,7 @@ output * bg #000000 solid_color
 
 
 ### Input configuration
-input "1452:641:Apple_Internal_Keyboard_/_Trackpad" {
+input "1452:850:Apple_MTP_keyboard" {
     dwt enabled                 # Disable while typing
     tap enabled                 # Tap registers as a click
     accel_profile adaptive      # adaptive/flat cursor acceleration
@@ -85,7 +85,7 @@ input "1452:641:Apple_Internal_Keyboard_/_Trackpad" {
     tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
     xkb_layout us,ru
 }
-bindsym $mod+space input "1452:641:Apple_Internal_Keyboard_/_Trackpad" xkb_switch_layout next 
+bindsym $mod+space input "1452:850:Apple_MTP_keyboard" xkb_switch_layout next 
 input type:keyboard {
     repeat_rate 45
     repeat_delay 500

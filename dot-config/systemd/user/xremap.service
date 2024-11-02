@@ -1,0 +1,10 @@
+[Unit]
+Description=Start xremap daemon
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/home/tikhon/.config/personal/scripts/remap.sh
+
+[Install]
+WantedBy=sway-session.target

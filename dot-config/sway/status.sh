@@ -4,7 +4,7 @@
 date_string=$(date +'%d %b %k:%M')
 
 # Keyboard layout
-layout=$(swaymsg -t get_inputs -r | jq '.[] | select(.identifier == "1452:641:Apple_Internal_Keyboard_/_Trackpad" and .type == "keyboard") | .xkb_active_layout_name' -r --unbuffered)
+layout=$(swaymsg -t get_inputs -r | jq '.[] | select(.identifier == "1452:850:Apple_MTP_keyboard" and .type == "keyboard") | .xkb_active_layout_name' -r --unbuffered)
 
 # Battery
 battery_string="Battery $(cat /sys/class/power_supply/macsmc-battery/status): $(cat /sys/class/power_supply/macsmc-battery/capacity)%"
@@ -56,3 +56,4 @@ fi
 
 # Status bar
 echo "$playing_string" "$volume_string" "|" "$wifi_string" "|" "$battery_string" "|" "$layout" "|" "$date_string"
+
