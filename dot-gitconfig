@@ -3,7 +3,7 @@
 [gpg]
 	format = ssh
 [user]
-	signingkey = /Users/tikhon/.ssh/id_ed25519.pub
+	signingkey = ~/.ssh/id_ed25519.pub
 	name = TikhonP
 	email = tikhon.petrishchev@gmail.com
 [commit]
