@@ -29,15 +29,20 @@ bindsym $mod+m exec firefox --new-window https://play.qobuz.com/
 
 
 # FUNCTION buttons control
+
+# Wob indicator:
+set $SWAYSOCK.wob $XDG_RUNTIME_DIR/wob.sock
+exec rm -f $SWAYSOCK.wob && mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
+
 bindsym XF86Search exec $menu
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
-bindsym --locked XF86AudioMute exec amixer set Master toggle
-bindsym --locked XF86AudioRaiseVolume exec amixer set Master 2%+
-bindsym --locked XF86AudioLowerVolume exec amixer set Master 2%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 10%+
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym --locked XF86AudioMute exec amixer set Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' > $SWAYSOCK.wob
+bindsym --locked XF86AudioRaiseVolume exec amixer set Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob 
+bindsym --locked XF86AudioLowerVolume exec amixer set Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
 
 
 # MacOS-like keybindings
@@ -66,6 +71,7 @@ exec swayidle -w \
     timeout $suspend_timeout 'systemctl suspend' \
     before-sleep $locker \
     after-resume 'swaymsg "output * power on"'
+    for_window [shell=".*"] inhibit_idle fullscreen \
 
 
 ### Output configuration
@@ -174,8 +180,7 @@ input type:keyboard {
     bindsym $mod+b splith
     bindsym $mod+v splitv
 
-    # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
+    # Switch the current container between different layout styles bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
@@ -256,5 +261,10 @@ bar {
     }
 }
 
+# Picture In Picture
+for_window [app_id="firefox" title="^Picture-in-Picture$"] \
+    floating enable, move position 877 450, sticky enable
+
+exec systemctl --user restart xremap.service
 
 include @sysconfdir@/sway/config.d/*

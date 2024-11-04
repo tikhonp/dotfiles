@@ -41,3 +41,17 @@ fim() {
     fi
 }
 
+enable_proxy() {
+    if [ -z "$MY_PROXY_SERVER" ]; then
+        echo 'Error: MY_PROXY_SERVER is not set';
+    fi
+
+    export http_proxy=$MY_PROXY_SERVER
+    export https_proxy=$MY_PROXY_SERVER
+}
+
+disable_proxy() {
+    unset http_proxy
+    unset https_proxy
+}
+

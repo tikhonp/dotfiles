@@ -17,3 +17,4 @@ alias la='ls -lAh '
 
 alias icat='kitty icat '
 alias switchos='~/.config/personal/scripts/switch-os'
+alias start-docker='sudo systemctl start docker'
