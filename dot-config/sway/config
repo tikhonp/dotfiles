@@ -25,6 +25,7 @@ bindsym $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select
 # Programs
 bindsym $mod+i exec firefox
 bindsym $mod+shift+f exec foot
+bindsym $mod+shift+t exec telegram-desktop
 bindsym $mod+m exec firefox --new-window https://play.qobuz.com/
 
 
@@ -91,7 +92,7 @@ input "1452:850:Apple_MTP_keyboard" {
     tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
     xkb_layout us,ru
 }
-bindsym $mod+space input "1452:850:Apple_MTP_keyboard" xkb_switch_layout next 
+bindsym $mod+space exec $HOME/.config/sway/switch-layout.sh
 input type:keyboard {
     repeat_rate 45
     repeat_delay 500
