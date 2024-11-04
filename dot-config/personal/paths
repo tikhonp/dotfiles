@@ -4,4 +4,5 @@ addToPath "$GOPATH"/bin
 addToPath "$HOME"/Library/Android/sdk/platform-tools/adb
 addToPath "/opt/homebrew/opt/gradle@6/bin"
 addToPath "/Users/tikhon/Library/Application Support/JetBrains/Toolbox/scripts"
+addToPath "$HOME"/.local/bin
 

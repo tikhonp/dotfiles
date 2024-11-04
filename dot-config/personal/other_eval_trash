@@ -36,5 +36,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
 fi
 
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    addToPath /home/tikhon/.platformio/penv/bin
+fi
+
 # export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin
 # export IDF_PATH=~/esp/ESP8266_RTOS_SDK
