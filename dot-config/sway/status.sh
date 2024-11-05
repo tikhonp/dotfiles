@@ -37,11 +37,15 @@ if [ "$playing_status" ] && [ "$playing_status" != "No players found" ]; then
     # get sample rate
     headphones_running=$(grep RUNNING /proc/asound/card0/pcm0p/sub0/status | tr -d ' ')
     speakers_running=$(grep RUNNING /proc/asound/card0/pcm1p/sub0/status | tr -d ' ')
+    soundcard_running=$(grep RUNNING /proc/asound/card1/pcm0p/sub0/status | tr -d ' ')
     if [[ $headphones_running != "" ]]; then
         raw_sample_rate=$(grep rate /proc/asound/card0/pcm0p/sub0/hw_params | awk '{print $2}')
         sample_rate="$(bc <<< "scale=1; $raw_sample_rate / 1000" | sed 's/\.0$//')kHz "
     elif [[ $speakers_running != "" ]]; then
         raw_sample_rate=$(grep rate /proc/asound/card0/pcm1p/sub0/hw_params | awk '{print $2}')
+        sample_rate="$(bc <<< "scale=1; $raw_sample_rate / 1000" | sed 's/\.0$//')kHz "
+    elif [[ $soundcard_running != "" ]]; then
+        raw_sample_rate=$(grep rate /proc/asound/card1/pcm0p/sub0/hw_params | awk '{print $2}')
         sample_rate="$(bc <<< "scale=1; $raw_sample_rate / 1000" | sed 's/\.0$//')kHz "
     else
         sample_rate=""
