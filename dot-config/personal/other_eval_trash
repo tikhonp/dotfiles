@@ -44,3 +44,4 @@ fi
 # export IDF_PATH=~/esp/ESP8266_RTOS_SDK
 
 alias get_idf='. $HOME/esp/esp-idf/export.sh'
+alias idf=idf.py

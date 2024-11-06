@@ -3,12 +3,6 @@
 alias vim='$VIM'
 alias vi='$VIM'
 
-alias t="tmux a"
-alias c="clear"
-alias p="cd ~/projects/"
-alias f="fuck"
-alias s=server
-
 alias msync="rsync -rvaE --progress --delete"
 
 alias ls='ls --color '
@@ -20,3 +14,10 @@ alias switchos='~/.config/personal/scripts/switch-os'
 alias start-docker='sudo systemctl start docker'
 alias stop-docker='sudo systemctl stop docker'
 alias tmux-sessionizer='~/.config/personal/scripts/tmux-sessionizer'
+
+alias t="tmux attach || ~/.config/personal/scripts/tmux-sessionizer"
+alias c="clear"
+alias p="cd ~/projects/"
+alias f="fuck"
+alias s=server
+alias d=sway
