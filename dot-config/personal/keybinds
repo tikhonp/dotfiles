@@ -8,6 +8,8 @@ bindkey "^?" backward-delete-char # fix backspace after vi keybinds
 
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
 bindkey '^y' autosuggest-accept
 bindkey -s "^o" "cd ..\n"
 bindkey -s "^f" "^u$XDG_CONFIG_HOME/personal/scripts/tmux-sessionizer^M"

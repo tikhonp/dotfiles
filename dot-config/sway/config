@@ -48,15 +48,21 @@ bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.
 
 # MacOS-like keybindings
 # You need to have 'wtype' installed 
+bindsym --to-code $mod+z exec wtype -M ctrl -P z
+bindsym --to-code $mod+a exec wtype -M ctrl -P a
+bindsym --to-code $mod+s exec wtype -M ctrl -P s
+bindsym --to-code $mod+f exec wtype -M ctrl -P f
 bindsym --to-code $mod+x exec wtype -M shift -P delete
 bindsym --to-code $mod+c exec wtype -M ctrl -P insert
-bindsym --to-code $mod+v exec wtype -M shift -P insert
+bindsym --to-code $mod+v exec wtype -M ctrl -M shift -P v
 bindsym --to-code $mod+p exec wtype -M ctrl -P p
 bindsym --to-code $mod+t exec wtype -M ctrl -P t
 bindsym --to-code $mod+w exec wtype -M ctrl -P w
 bindsym --to-code $mod+r exec wtype -M ctrl -P r
 bindsym --to-code $mod+y exec wtype -M ctrl -P h
 bindsym --to-code $mod+l exec wtype -M ctrl -P l
+bindsym --to-code Ctrl+p exec wtype -P Up
+bindsym --to-code Ctrl+n exec wtype -P Down
 
 
 ### Idle configuration
@@ -92,11 +98,12 @@ input "1452:850:Apple_MTP_keyboard" {
     tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
     xkb_layout us,ru
 }
-bindsym $mod+space exec $HOME/.config/sway/switch-layout.sh
+bindsym $mod+space exec sway input "1452:850:Apple_MTP_keyboard" xkb_switch_layout next 
 input type:keyboard {
     repeat_rate 45
     repeat_delay 500
     xkb_options compose:ralt
+    xkb_options caps:swapescape
 }
 
 ### Key bindings
@@ -186,7 +193,7 @@ input type:keyboard {
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
+    # bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
@@ -195,7 +202,7 @@ input type:keyboard {
     # bindsym $mod+space focus mode_toggle
 
     # Move focus to the parent container
-    bindsym $mod+a focus parent
+    # bindsym $mod+a focus parent
 #
 # Scratchpad:
 #
@@ -265,7 +272,5 @@ bar {
 # Picture In Picture
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable
-
-exec systemctl --user restart xremap.service
 
 include @sysconfdir@/sway/config.d/*
