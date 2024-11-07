@@ -12,21 +12,21 @@ set $term_cwd $term --working-directory "$(swaycwd 2>/dev/null || echo $HOME)"
 # Launcher sway-launcher-desktop
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 set $menu exec $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /home/tikhon/src/sway-launcher-desktop/sway-launcher-desktop.sh
-bindsym $mod+d exec $menu
+bindsym --to-code $mod+d exec $menu
 
 
 # Screenshots
 # capture the specified screen area to clipboard    
-bindsym $mod+shift+s exec grim -g "$(slurp -d)" - | wl-copy 
+bindsym --to-code $mod+shift+s exec grim -g "$(slurp -d)" - | wl-copy 
 # capture the focused monitor to clipboard    
-bindsym $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+bindsym --to-code $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
 
 
 # Programs
-bindsym $mod+i exec firefox
-bindsym $mod+shift+f exec foot
-bindsym $mod+shift+t exec telegram-desktop
-bindsym $mod+m exec firefox --new-window https://play.qobuz.com/
+bindsym --to-code $mod+i exec firefox
+bindsym --to-code $mod+shift+f exec foot
+bindsym --to-code $mod+shift+t exec telegram-desktop
+bindsym --to-code $mod+m exec firefox --new-window https://play.qobuz.com/
 
 
 # FUNCTION buttons control
@@ -37,13 +37,13 @@ exec rm -f $SWAYSOCK.wob && mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
 
 bindsym XF86Search exec $menu
 bindsym --locked XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
 bindsym --locked XF86AudioMute exec amixer set Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' > $SWAYSOCK.wob
 bindsym --locked XF86AudioRaiseVolume exec amixer set Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob 
 bindsym --locked XF86AudioLowerVolume exec amixer set Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
 
 
 # MacOS-like keybindings
@@ -114,7 +114,7 @@ input type:keyboard {
     bindsym $mod+Return exec $term
 
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym --to-code $mod+q kill
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -124,34 +124,43 @@ input type:keyboard {
     floating_modifier $mod normal
 
     # Reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym --to-code $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
+mode "move" {
     # Move your focus around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+    bindsym --to-code $mod+$left focus left; mode "default"
+    bindsym --to-code $mod+$down focus down; mode "default"
+    bindsym --to-code $mod+$up focus up; mode "default"
+    bindsym --to-code $mod+$right focus right; mode "default"
+
     # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
+    bindsym $mod+Left focus left; mode "default"
+    bindsym $mod+Down focus down; mode "default"
+    bindsym $mod+Up focus up; mode "default"
+    bindsym $mod+Right focus right; mode "default"
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    bindsym --to-code $mod+Shift+$left move left; mode "default"
+    bindsym --to-code $mod+Shift+$down move down; mode "default"
+    bindsym --to-code $mod+Shift+$up move up; mode "default"
+    bindsym --to-code $mod+Shift+$right move right; mode "default"
+
     # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+    bindsym $mod+Shift+Left move left; mode "default"
+    bindsym $mod+Shift+Down move down; mode "default"
+    bindsym $mod+Shift+Up move up; mode "default"
+    bindsym $mod+Shift+Right move right; mode "default"
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+bindsym --to-code $mod+Shift+w mode "move"
+
 #
 # Workspaces:
 #
@@ -185,12 +194,13 @@ input type:keyboard {
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
+
+    # bindsym --to-code $mod+b splith
+    # bindsym --to-code $mod+v splitv
 
     # Switch the current container between different layout styles bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
+    # bindsym --to-code $mod+w layout tabbed
+    bindsym --to-code $mod+e layout toggle split
 
     # Make the current focus fullscreen
     # bindsym $mod+f fullscreen
@@ -223,22 +233,22 @@ mode "resize" {
     # right will grow the containers width
     # up will shrink the containers height
     # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    bindsym --to-code $left resize shrink width 10px
+    bindsym --to-code $down resize grow height 10px
+    bindsym --to-code $up resize shrink height 10px
+    bindsym --to-code $right resize grow width 10px
 
     # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
+    bindsym --to-code Left resize shrink width 10px
+    bindsym --to-code Down resize grow height 10px
+    bindsym --to-code Up resize shrink height 10px
+    bindsym --to-code Right resize grow width 10px
 
     # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+shift+r mode "resize"
+bindsym --to-code $mod+shift+r mode "resize"
 
 
 # DESIGN just hide fucking everything

@@ -64,3 +64,4 @@ TODO
 Firefox theme https://github.com/marmmaz/FirefoxCSS
 https://github.com/Dook97/firefox-qutebrowser-userchrome
 
+https://github.com/Kir-Antipov/outline-cli
