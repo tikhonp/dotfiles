@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Date
-date_string=$(date +'%d %b %k:%M')
+date_string=$(date +'%d %b %H:%M')
 
 # Keyboard layout
 layout=$(swaymsg -t get_inputs -r | jq '.[] | select(.identifier == "1452:850:Apple_MTP_keyboard" and .type == "keyboard") | .xkb_active_layout_name' -r --unbuffered)

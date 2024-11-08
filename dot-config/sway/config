@@ -44,7 +44,8 @@ bindsym --locked XF86AudioRaiseVolume exec amixer set Master 5%+ | sed -En 's/.*
 bindsym --locked XF86AudioLowerVolume exec amixer set Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob
 bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
-
+bindsym Shift+XF86MonBrightnessUp exec brightnessctl --device=kbd_backlight set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+bindsym Shift+XF86MonBrightnessDown exec brightnessctl --device=kbd_backlight set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
 
 # MacOS-like keybindings
 # You need to have 'wtype' installed 
@@ -68,8 +69,8 @@ bindsym --to-code Ctrl+n exec wtype -P Down
 ### Idle configuration
 
 set $locker $HOME/.config/sway/swaylock.sh
-set $lock_timeout 600
-set $suspend_timeout 600
+set $lock_timeout 300
+set $suspend_timeout 900
 exec swayidle -w \
 	timeout $lock_timeout $locker \
 	timeout $lock_timeout 'swaymsg "output * power off"' \
@@ -90,9 +91,9 @@ input "1452:850:Apple_MTP_keyboard" {
     dwt enabled                 # Disable while typing
     tap enabled                 # Tap registers as a click
     accel_profile adaptive      # adaptive/flat cursor acceleration
-    pointer_accel 0             # From -1 to 1: Speed of cursor
+    pointer_accel 0.3           # From -1 to 1: Speed of cursor
     natural_scroll enabled      # Direction of Scroll
-    scroll_factor 0.4           # Speed of Scrolling gets multiplied by this factor
+    scroll_factor 0.1           # Speed of Scrolling gets multiplied by this factor
     scroll_method two_finger    # none|two_finger|edge|on_button_down
     middle_emulation enabled    # Enables middle click
     tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
@@ -102,8 +103,7 @@ bindsym $mod+space exec sway input "1452:850:Apple_MTP_keyboard" xkb_switch_layo
 input type:keyboard {
     repeat_rate 45
     repeat_delay 500
-    xkb_options compose:ralt
-    xkb_options caps:swapescape
+    xkb_options compose:ralt,caps:escape,apple:badmap
 }
 
 ### Key bindings
