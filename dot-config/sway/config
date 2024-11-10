@@ -26,7 +26,8 @@ bindsym --to-code $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[
 bindsym --to-code $mod+i exec firefox
 bindsym --to-code $mod+shift+f exec foot
 bindsym --to-code $mod+shift+t exec telegram-desktop
-bindsym --to-code $mod+m exec firefox --new-window https://play.qobuz.com/
+# bindsym --to-code $mod+m exec firefox --new-window https://play.qobuz.com/
+bindsym --to-code $mod+m exec firefox --new-window https://music.apple.com/ru/home?l=en
 
 
 # FUNCTION buttons control
@@ -260,8 +261,7 @@ bar {
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable
 
-
-# Firefox notifications
-for_window [app_id="firefox" title=""] floating enable
+exec mako
+bindsym --to-code $mod+h exec makoctl dismiss -a
 
 include @sysconfdir@/sway/config.d/*
