@@ -97,13 +97,14 @@ input "1452:850:Apple_MTP_keyboard" {
     scroll_method two_finger    # none|two_finger|edge|on_button_down
     middle_emulation enabled    # Enables middle click
     tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
-    xkb_layout us,ru
+    xkb_model applealu_ansi
+    xkb_variant mac
 }
-bindsym $mod+space exec sway input "1452:850:Apple_MTP_keyboard" xkb_switch_layout next 
 input type:keyboard {
+    xkb_layout us,ru
     repeat_rate 45
     repeat_delay 500
-    xkb_options compose:ralt,caps:escape,apple:badmap
+    xkb_options caps:escape,grp:win_space_toggle,grp_led:caps
 }
 
 ### Key bindings
@@ -133,28 +134,16 @@ input type:keyboard {
 #
 mode "move" {
     # Move your focus around
-    bindsym --to-code $mod+$left focus left; mode "default"
-    bindsym --to-code $mod+$down focus down; mode "default"
-    bindsym --to-code $mod+$up focus up; mode "default"
-    bindsym --to-code $mod+$right focus right; mode "default"
-
-    # Or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left; mode "default"
-    bindsym $mod+Down focus down; mode "default"
-    bindsym $mod+Up focus up; mode "default"
-    bindsym $mod+Right focus right; mode "default"
+    bindsym --to-code $left focus left; mode "default"
+    bindsym --to-code $down focus down; mode "default"
+    bindsym --to-code $up focus up; mode "default"
+    bindsym --to-code $right focus right; mode "default"
 
     # Move the focused window with the same, but add Shift
-    bindsym --to-code $mod+Shift+$left move left; mode "default"
-    bindsym --to-code $mod+Shift+$down move down; mode "default"
-    bindsym --to-code $mod+Shift+$up move up; mode "default"
-    bindsym --to-code $mod+Shift+$right move right; mode "default"
-
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left; mode "default"
-    bindsym $mod+Shift+Down move down; mode "default"
-    bindsym $mod+Shift+Up move up; mode "default"
-    bindsym $mod+Shift+Right move right; mode "default"
+    bindsym --to-code Shift+$left move left; mode "default"
+    bindsym --to-code Shift+$down move down; mode "default"
+    bindsym --to-code Shift+$up move up; mode "default"
+    bindsym --to-code Shift+$right move right; mode "default"
 
     # Return to default mode
     bindsym Escape mode "default"
@@ -203,7 +192,7 @@ bindsym --to-code $mod+Shift+w mode "move"
     bindsym --to-code $mod+e layout toggle split
 
     # Make the current focus fullscreen
-    # bindsym $mod+f fullscreen
+    bindsym $mod+Shift+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
@@ -220,31 +209,20 @@ bindsym --to-code $mod+Shift+w mode "move"
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    # bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    # bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
 mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
     bindsym --to-code $left resize shrink width 10px
     bindsym --to-code $down resize grow height 10px
     bindsym --to-code $up resize shrink height 10px
     bindsym --to-code $right resize grow width 10px
 
-    # Ditto, with arrow keys
-    bindsym --to-code Left resize shrink width 10px
-    bindsym --to-code Down resize grow height 10px
-    bindsym --to-code Up resize shrink height 10px
-    bindsym --to-code Right resize grow width 10px
-
-    # Return to default mode
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
@@ -267,9 +245,8 @@ client.unfocused         #333333  #222222     #888888  #292d2e    $clear
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
+    font pango:Fira Mono 11
 
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
     status_command while $HOME/.config/sway/status.sh; do sleep 1; done
 
     colors {
@@ -282,5 +259,9 @@ bar {
 # Picture In Picture
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable
+
+
+# Firefox notifications
+for_window [app_id="firefox" title=""] floating enable
 
 include @sysconfdir@/sway/config.d/*
