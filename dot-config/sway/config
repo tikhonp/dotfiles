@@ -264,4 +264,6 @@ for_window [app_id="firefox" title="^Picture-in-Picture$"] \
 exec mako
 bindsym --to-code $mod+h exec makoctl dismiss -a
 
+exec systemctl --user restart rescrobbled.service
+
 include @sysconfdir@/sway/config.d/*
