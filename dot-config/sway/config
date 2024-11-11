@@ -27,7 +27,8 @@ bindsym --to-code $mod+i exec firefox
 bindsym --to-code $mod+shift+f exec foot
 bindsym --to-code $mod+shift+t exec telegram-desktop
 # bindsym --to-code $mod+m exec firefox --new-window https://play.qobuz.com/
-bindsym --to-code $mod+m exec firefox --new-window https://music.apple.com/ru/home?l=en
+# bindsym --to-code $mod+m exec firefox --new-window https://music.apple.com/ru/home?l=en
+bindsym --to-code $mod+m exec $term hifi-rs open
 
 
 # FUNCTION buttons control
