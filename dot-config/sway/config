@@ -71,8 +71,8 @@ bindsym --to-code Ctrl+n exec wtype -P Down
 ### Idle configuration
 
 set $locker $HOME/.config/sway/swaylock.sh
-set $lock_timeout 300
-set $suspend_timeout 900
+set $lock_timeout 900
+set $suspend_timeout 1800
 exec swayidle -w \
 	timeout $lock_timeout $locker \
 	timeout $lock_timeout 'swaymsg "output * power off"' \
