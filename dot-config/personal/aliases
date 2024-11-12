@@ -14,6 +14,7 @@ alias switchos='~/.config/personal/scripts/switch-os'
 alias start-docker='sudo systemctl start docker'
 alias stop-docker='sudo systemctl stop docker'
 alias tmux-sessionizer='~/.config/personal/scripts/tmux-sessionizer'
+alias vpn='sudo vpn'
 
 alias t="tmux attach || ~/.config/personal/scripts/tmux-sessionizer"
 alias c="clear"
