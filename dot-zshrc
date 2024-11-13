@@ -2,7 +2,7 @@
 
 export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
-export EDITOR='vim'
+export EDITOR=$VIM
 export GIT_EDITOR=$VIM
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then

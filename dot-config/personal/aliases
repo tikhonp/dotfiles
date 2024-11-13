@@ -2,6 +2,7 @@
 
 alias vim='$VIM'
 alias vi='$VIM'
+alias v='$VIM'
 
 alias msync="rsync -rvaE --progress --delete"
 
@@ -22,3 +23,7 @@ alias p="cd ~/projects/"
 alias f="fuck"
 alias s=server
 alias d=sway
+alias e='$EDITOR'
+
+alias toggle-display='swaymsg output $(swaymsg -t get_outputs -r | jq ".[].name" | fzf) toggle'
+
