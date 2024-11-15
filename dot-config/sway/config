@@ -1,75 +1,90 @@
-### Variables
+# :) 
+
 set $mod Mod4
 set $left h
 set $down j
 set $up k
 set $right l
 
-# Kitty for terminal
+# Kitty as terminal (mod+enter)
+# https://sw.kovidgoyal.net/kitty/
 set $term /usr/bin/kitty
 set $term_cwd $term --working-directory "$(swaycwd 2>/dev/null || echo $HOME)"
+bindsym $mod+Return exec $term
 
-# Launcher sway-launcher-desktop
+# Launcher sway-launcher-desktop (mod+d)
+# https://github.com/Biont/sway-launcher-desktop
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 set $menu exec $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /home/tikhon/src/sway-launcher-desktop/sway-launcher-desktop.sh
 bindsym --to-code $mod+d exec $menu
 
+# grim for screenshots
+bindsym --to-code {
+    
+    # capture the specified screen area to clipboard    
+    $mod+shift+s exec grim -g "$(slurp -d)" - | wl-copy
 
-# Screenshots
-# capture the specified screen area to clipboard    
-bindsym --to-code $mod+shift+s exec grim -g "$(slurp -d)" - | wl-copy 
-# capture the focused monitor to clipboard    
-bindsym --to-code $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+    # capture the focused monitor to clipboard    
+    $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+}
 
+# Open BASIC GUI apps shortcuts
+bindsym --to-code {
+    $mod+i exec firefox
+    $mod+shift+f exec foot # safety option if kitty is not working
+    $mod+shift+t exec telegram-desktop
+    $mod+m exec $term hifi-rs open
+}
 
-# Programs
-bindsym --to-code $mod+i exec firefox
-bindsym --to-code $mod+shift+f exec foot
-bindsym --to-code $mod+shift+t exec telegram-desktop
-# bindsym --to-code $mod+m exec firefox --new-window https://play.qobuz.com/
-# bindsym --to-code $mod+m exec firefox --new-window https://music.apple.com/ru/home?l=en
-bindsym --to-code $mod+m exec $term hifi-rs open
-
-
-# FUNCTION buttons control
-
-# Wob indicator:
+# Wob indicator
+# https://github.com/francma/wob
 set $SWAYSOCK.wob $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $SWAYSOCK.wob && mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
 
+# Volume controls
+bindsym --locked {
+    XF86AudioMute exec amixer set Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' > $SWAYSOCK.wob
+    XF86AudioRaiseVolume exec amixer set Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob 
+    XF86AudioLowerVolume exec amixer set Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob
+}
+# Brightness controls
+bindsym {
+    XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+    XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+    Shift+XF86MonBrightnessUp exec brightnessctl --device=kbd_backlight set 5%+ | sed -En 's/.*\(([0-9]+)%\)
+    Shift+XF86MonBrightnessDown exec brightnessctl --device=kbd_backlight set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
+}
+# Player controls
+bindsym {
+    XF86AudioPlay exec playerctl play-pause
+    XF86AudioNext exec playerctl next
+    XF86AudioPrev exec playerctl previous
+}
 bindsym XF86Search exec $menu
-bindsym --locked XF86AudioPlay exec playerctl play-pause
-bindsym --locked XF86AudioNext exec playerctl next
-bindsym --locked XF86AudioPrev exec playerctl previous
-bindsym --locked XF86AudioMute exec amixer set Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' > $SWAYSOCK.wob
-bindsym --locked XF86AudioRaiseVolume exec amixer set Master 5%+ | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob 
-bindsym --locked XF86AudioLowerVolume exec amixer set Master 5%- | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob
-bindsym XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
-bindsym Shift+XF86MonBrightnessUp exec brightnessctl --device=kbd_backlight set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
-bindsym Shift+XF86MonBrightnessDown exec brightnessctl --device=kbd_backlight set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
 
 # MacOS-like keybindings
 # You need to have 'wtype' installed 
-bindsym --to-code $mod+z exec wtype -M ctrl -P z
-bindsym --to-code $mod+a exec wtype -M ctrl -P a
-bindsym --to-code $mod+s exec wtype -M ctrl -P s
-bindsym --to-code $mod+f exec wtype -M ctrl -P f
-bindsym --to-code $mod+x exec wtype -M shift -P delete
-bindsym --to-code $mod+c exec wtype -M ctrl -P insert
-bindsym --to-code $mod+v exec wtype -M ctrl -M shift -P v
-bindsym --to-code $mod+p exec wtype -M ctrl -P p
-bindsym --to-code $mod+t exec wtype -M ctrl -P t
-bindsym --to-code $mod+w exec wtype -M ctrl -P w
-bindsym --to-code $mod+r exec wtype -M ctrl -P r
-bindsym --to-code $mod+y exec wtype -M ctrl -P h
-bindsym --to-code $mod+l exec wtype -M ctrl -P l
-bindsym --to-code Ctrl+p exec wtype -P Up
-bindsym --to-code Ctrl+n exec wtype -P Down
+# https://github.com/atx/wtype
+bindsym --to-code {
+    $mod+z exec wtype -M ctrl -P z
+    $mod+a exec wtype -M ctrl -P a
+    $mod+s exec wtype -M ctrl -P s
+    $mod+f exec wtype -M ctrl -P f
+    $mod+x exec wtype -M shift -P delete
+    $mod+c exec wtype -M ctrl -P insert
+    $mod+v exec wtype -M ctrl -M shift -P v
+    $mod+p exec wtype -M ctrl -P p
+    $mod+t exec wtype -M ctrl -P t
+    $mod+w exec wtype -M ctrl -P w
+    $mod+r exec wtype -M ctrl -P r
+    $mod+y exec wtype -M ctrl -P h
+    $mod+l exec wtype -M ctrl -P l
+    Ctrl+p exec wtype -P Up
+    Ctrl+n exec wtype -P Down
+}
 
-
-### Idle configuration
-
+# Idle configuration (swaylock)
+# https://github.com/swaywm/swaylock
 set $locker $HOME/.config/sway/swaylock.sh
 set $lock_timeout 900
 set $suspend_timeout 1800
@@ -83,57 +98,40 @@ exec swayidle -w \
     after-resume 'swaymsg "output * power on"'
     for_window [shell=".*"] inhibit_idle fullscreen \
 
-
 ### Output configuration
 output * bg #000000 solid_color
 
-
 ### Input configuration
+input "1452:850:Apple_MTP_multi-touch" {
+    dwt enabled        # Disable while typing
+    scroll_factor 0.13 # Perfect!
+}
 input "1452:850:Apple_MTP_keyboard" {
-    dwt enabled                 # Disable while typing
-    tap enabled                 # Tap registers as a click
-    accel_profile adaptive      # adaptive/flat cursor acceleration
-    pointer_accel 0.3           # From -1 to 1: Speed of cursor
-    natural_scroll enabled      # Direction of Scroll
-    scroll_factor 0.1           # Speed of Scrolling gets multiplied by this factor
-    scroll_method two_finger    # none|two_finger|edge|on_button_down
-    middle_emulation enabled    # Enables middle click
-    tap_button_map lmr          # 1Finger > Left Click , 2Finger > Right Click, 3Fingers > MiddleClick
     xkb_model applealu_ansi
     xkb_variant mac
 }
 input type:keyboard {
     xkb_layout us,ru
     repeat_rate 45
-    repeat_delay 500
+    repeat_delay 400
     xkb_options caps:escape,grp:win_space_toggle,grp_led:caps
 }
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
+# Drag floating windows by holding down $mod and left mouse button.
+floating_modifier $mod normal
 
-    # Kill focused window
-    bindsym --to-code $mod+q kill
+# Basic Key bindings
+bindsym --to-code {
+    $mod+q kill
+    $mod+Shift+c reload 
+}
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Exit sway (logs you out of your Wayland session)
+bindsym --to-code $mod+Shift+e exec swaynag -t \
+    warning -m 'Do you really want to exit sway? This will end your Wayland session.' \
+    -B 'Yes, exit sway' 'swaymsg exit'
 
-    # Reload the configuration file
-    bindsym --to-code $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym --to-code $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-#
 # Moving around:
-#
 mode "move" {
     # Move your focus around
     bindsym --to-code $left focus left; mode "default"
@@ -150,75 +148,43 @@ mode "move" {
     # Return to default mode
     bindsym Escape mode "default"
 }
-bindsym --to-code $mod+Shift+w mode "move"
+# enter move mode
+# like ctrl+b (or ctrl+a in my case) in tmux 
+bindsym --to-code $mod+Shift+w mode "move" 
 
-#
-# Workspaces:
-#
-    # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
-    # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
+# Switch to workspace
+bindsym {
+    $mod+1 workspace number 1
+    $mod+2 workspace number 2
+    $mod+3 workspace number 3
+    $mod+4 workspace number 4
+    $mod+5 workspace number 5
+    $mod+6 workspace number 6
+    $mod+7 workspace number 7
+    $mod+8 workspace number 8
+    $mod+9 workspace number 9
+    $mod+0 workspace number 10
+}
+# Move focused container to workspace
+bindsym {
+    $mod+Shift+1 move container to workspace number 1
+    $mod+Shift+2 move container to workspace number 2
+    $mod+Shift+3 move container to workspace number 3
+    $mod+Shift+4 move container to workspace number 4
+    $mod+Shift+5 move container to workspace number 5
+    $mod+Shift+6 move container to workspace number 6
+    $mod+Shift+7 move container to workspace number 7
+    $mod+Shift+8 move container to workspace number 8
+    $mod+Shift+9 move container to workspace number 9
+    $mod+Shift+0 move container to workspace number 10
+}
 
-    # bindsym --to-code $mod+b splith
-    # bindsym --to-code $mod+v splitv
+# Make the current focus fullscreen
+bindsym $mod+Shift+f fullscreen
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
 
-    # Switch the current container between different layout styles bindsym $mod+s layout stacking
-    # bindsym --to-code $mod+w layout tabbed
-    bindsym --to-code $mod+e layout toggle split
-
-    # Make the current focus fullscreen
-    bindsym $mod+Shift+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
-
-    # Swap focus between the tiling area and the floating area
-    # bindsym $mod+space focus mode_toggle
-
-    # Move focus to the parent container
-    # bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-    # bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    # bindsym $mod+minus scratchpad show
-#
 # Resizing containers:
-#
 mode "resize" {
     bindsym --to-code $left resize shrink width 10px
     bindsym --to-code $down resize grow height 10px
@@ -236,15 +202,11 @@ default_border none
 default_floating_border none
 
 set $clear #ffffff00
-
 # class                  border   background  text     indicator  child_border
 client.focused_inactive  #333333  #5f676a     #ffffff  #484e50    $clear
 client.unfocused         #333333  #222222     #888888  #292d2e    $clear
 
-#
 # Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
     font pango:Fira Mono 11
@@ -258,13 +220,16 @@ bar {
     }
 }
 
-# Picture In Picture
+# Firefox Picture In Picture
 for_window [app_id="firefox" title="^Picture-in-Picture$"] \
     floating enable, move position 877 450, sticky enable
 
+# Notifications using mako
+# https://github.com/emersion/mako
 exec mako
 bindsym --to-code $mod+h exec makoctl dismiss -a
 
+# Rescrobbled service 
 exec systemctl --user restart rescrobbled.service
 
 include @sysconfdir@/sway/config.d/*
