@@ -28,6 +28,7 @@ brew "luarocks"
 
 brew "ffmpeg"
 brew "imagemagick"
+brew "pkg-config"
 brew "speedtest-cli"
 brew "yt-dlp"
 
