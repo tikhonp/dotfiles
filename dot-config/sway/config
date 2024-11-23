@@ -180,7 +180,8 @@ bindsym {
 }
 
 # Make the current focus fullscreen
-bindsym $mod+Shift+f fullscreen
+# like in macos
+bindsym $mod+Ctrl+f fullscreen
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
 

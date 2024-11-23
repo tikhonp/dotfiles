@@ -1,7 +1,11 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 eval "$(fzf --zsh)"
 eval "$(thefuck --alias)"
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+
+# MACOS STAFF
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -18,31 +22,30 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
-[[ -f /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh ]] && . /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh || true
+# [[ -f /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh ]] && . /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh || true
+
+alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+
+fpath=(~/.docker/completions \\$fpath)
+
+DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+fi
 
 if [ -d "$HOME/.cargo" ]; then
     addToPath "$HOME/.cargo/bin"
     # source $HOME/.cargo/env
 fi
 
-alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
-
-fpath=(~/.docker/completions \\$fpath)
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    DYLD_FALLBACK_LIBRARY_PATH="$(brew --prefix)/lib:$DYLD_FALLBACK_LIBRARY_PATH"
-fi
-
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     addToPath /home/tikhon/.platformio/penv/bin
+
+    # alias get_idf='. $HOME/esp/esp-idf/export.sh'
+    # alias idf=idf.py
+
 fi
 
-# export PATH=$PATH:$HOME/esp/xtensa-lx106-elf/bin
-# export IDF_PATH=~/esp/ESP8266_RTOS_SDK
-
-alias get_idf='. $HOME/esp/esp-idf/export.sh'
-alias idf=idf.py
