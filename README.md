@@ -57,13 +57,8 @@ stow --target=$HOME . --dotfiles
 
 ## Linux setup
 
-TODO
+[Asahi Linux (form minimal) setup](setup_asahi.sh)
 
 ## Some cool stuff
 
-Firefox theme https://github.com/marmmaz/FirefoxCSS
-https://github.com/Dook97/firefox-qutebrowser-userchrome
-
-https://github.com/Kir-Antipov/outline-cli
-
-https://github.com/iamdb/hifi.rs
+Nothing cool today only boring staff

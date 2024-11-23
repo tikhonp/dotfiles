@@ -25,7 +25,8 @@ export NVM_DIR="$HOME/.nvm"
 [[ -f /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh ]] && . /Users/tikhon/.config/.dart-cli-completion/zsh-config.zsh || true
 
 if [ -d "$HOME/.cargo" ]; then
-    source $HOME/.cargo/env
+    addToPath "$HOME/.cargo/bin"
+    # source $HOME/.cargo/env
 fi
 
 alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
