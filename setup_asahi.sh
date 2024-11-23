@@ -148,3 +148,5 @@ SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox
 # enable wayland support for idea:
 # https://blog.jetbrains.com/platform/2024/07/wayland-support-preview-in-2024-2/
 
+# setup DRM
+sudo widevine-installer
