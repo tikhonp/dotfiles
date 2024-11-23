@@ -64,13 +64,8 @@ mkdir ~/projects
 mkdir ~/projects/sandbox
 mkdir -p ~/.config/systemd/user
 
-git clone git@github.com:tikhonp/dotfiles.git
+git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 cd dotfiles
-# patch nvim (i will fix it later MAYBE :))
-cd dot-config
-rm -r nvim
-git clone git@github.com:tikhonp/neovimrc.git nvim
-
 stow --target=$HOME . --dotfiles
 
 sudo dnf install zsh
