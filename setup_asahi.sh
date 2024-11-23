@@ -126,3 +126,25 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo systemctl enable --now docker
+sudo usermod -a -G docker $USER # log out -> log in after
+
+# Install apple pkl
+sudo dnf install java-latest-openjdk
+curl -Lo ~/.local/bin/pkl 'https://repo1.maven.org/maven2/org/pkl-lang/pkl-cli-java/0.27.0/pkl-cli-java-0.27.0.jar'
+chmod +x ~/.local/bin/pkl
+go install github.com/apple/pkl-go/cmd/pkl-gen-go@v0.8.0
+
+# install jetbrains toolbox and datagrip
+# https://www.jetbrains.com/toolbox-app/
+sudo dnf install fuse fuse-libs
+vpn connect
+# https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=linuxARM64
+cd ~/Downloads
+tar xvf jetbrains-toolbox-2.5.2.35332-arm64.tar.gz
+mv jetbrains-toolbox-2.5.2.35332/jetbrains-toolbox ~/.local/bin
+rm -r jetbrains-toolbox-2.5.2.35332 jetbrains-toolbox-2.5.2.35332-arm64.tar.gz
+# run it as:
+SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox
+# enable wayland support for idea:
+# https://blog.jetbrains.com/platform/2024/07/wayland-support-preview-in-2024-2/
+
