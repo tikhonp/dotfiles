@@ -4,6 +4,7 @@ export XDG_CONFIG_HOME=$HOME/.config
 VIM="nvim"
 export EDITOR=$VIM
 export GIT_EDITOR=$VIM
+export SYSTEMD_EDITOR=$VIM
 
 if [[ -f "/opt/homebrew/bin/brew" ]] then
   eval "$(/opt/homebrew/bin/brew shellenv)"

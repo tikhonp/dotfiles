@@ -46,6 +46,8 @@ sudo dnf install \
 pip install -U pip
 pip install neovim # install neovim python headers
 
+sudo dnf remove nano
+
 # sway desktop packages
 sudo dnf install \
     mozilla-fira-mono-fonts \
@@ -122,6 +124,10 @@ sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/do
 sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 # sudo systemctl enable --now docker
 sudo usermod -a -G docker $USER # log out -> log in after
+# ZSH completions
+# https://docs.docker.com/engine/cli/completion/#zsh
+mkdir -p ~/.docker/completions
+docker completion zsh > ~/.docker/completions/_docker
 
 # Install apple pkl
 sudo dnf install java-latest-openjdk
@@ -145,3 +151,14 @@ SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox
 
 # setup DRM
 sudo widevine-installer
+
+# Disable Power BUTTON:
+#
+#   /etc/systemd/logind.conf
+#
+#   [Login]
+#   HandlePowerKey=ignore
+#
+#
+#   Then restart logind:
+#   sudo systemctl restart systemd-logind

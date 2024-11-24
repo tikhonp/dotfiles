@@ -47,5 +47,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # alias get_idf='. $HOME/esp/esp-idf/export.sh'
     # alias idf=idf.py
 
+    FPATH="$HOME/.docker/completions:$FPATH"
+
 fi
 
