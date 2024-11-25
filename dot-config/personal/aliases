@@ -25,7 +25,7 @@ alias s=server
 alias d=sway
 alias e='$EDITOR'
 
-alias toggle-display='swaymsg output $(swaymsg -t get_outputs -r | jq ".[].name" | fzf) toggle'
+alias toggle-display='swaymsg output "eDP-1" toggle'
 
 alias what-playing='xdg-open "https://www.google.com/search?q=$(playerctl metadata --format '\''{{artist}} {{album}}'\'' | sed '\''s/ /+/g'\'')"'
 

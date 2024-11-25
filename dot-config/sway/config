@@ -85,18 +85,21 @@ bindsym --to-code {
 
 # Idle configuration (swaylock)
 # https://github.com/swaywm/swaylock
+# https://gitlab.com/fedora/sigs/sway/sway-config-fedora/-/blob/fedora/sway/config.d/90-swayidle.conf
 set $locker $HOME/.config/sway/swaylock.sh
-set $lock_timeout 900
-set $suspend_timeout 1800
-exec swayidle -w \
-	timeout $lock_timeout $locker \
-	timeout $lock_timeout 'swaymsg "output * power off"' \
-            resume 'swaymsg "output * power on"' \
-    timeout $lock_timeout 'playerctl pause' \
-    timeout $suspend_timeout 'systemctl suspend' \
-    before-sleep $locker \
-    after-resume 'swaymsg "output * power on"'
-    for_window [shell=".*"] inhibit_idle fullscreen \
+set $lock_timeout 300
+set $screen_timeout 250
+exec LT="$lock_timeout" ST="$screen_timeout" LT=${LT:-300} ST=${ST:-60} && \
+    swayidle -w \
+        timeout $LT $locker \
+        timeout $((LT + ST)) 'swaymsg "output * power off"' \
+                      resume 'swaymsg "output * power on"'  \
+        timeout $ST 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power off"' \
+             resume 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power on"'  \
+        before-sleep $locker \
+        lock $locker \
+        unlock 'pkill -xu "$USER" -SIGUSR1 swaylock'
+bindsym --to-code $mod+Shift+l exec loginctl lock-session
 
 ### Output configuration
 output * bg #000000 solid_color
@@ -221,10 +224,12 @@ bar {
     }
 }
 
-for_window [app_id="firefox" title="^Picture-in-Picture$"] \
-    floating enable, move position 877 450, sticky enable
 for_window [title="Picture in picture"] \
     floating enable, move position 877 450, sticky enable
+for_window [class="Chromium-browser"] mark Browser
+for_window [con_mark="Browser"] {
+    inhibit_idle fullscreen
+}
 
 # Notifications using mako
 # https://github.com/emersion/mako
