@@ -30,7 +30,7 @@ bindsym --to-code {
 
 # Open BASIC GUI apps shortcuts
 bindsym --to-code {
-    $mod+i exec chromium-browser --force-dark-mode
+    $mod+i exec $XDG_CONFIG_HOME/local/chromium.sh
     $mod+shift+f exec foot # safety option if kitty is not working
     $mod+shift+t exec telegram-desktop
     $mod+m exec $term hifi-rs open
