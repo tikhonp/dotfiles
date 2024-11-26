@@ -26,7 +26,6 @@ zstyle ':vcs_info:git:*' formats "%b%%{$fg[red]%}%m%u%c%{$reset_color%} "
 setopt PROMPT_SUBST
 PROMPT='%{$fg[cyan]%}%1//.%{$reset_color%} ${vcs_info_msg_0_}%% '
 
-# zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions

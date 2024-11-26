@@ -20,6 +20,9 @@ sudo dnf install chromium
 # 2. Search "Preferred Ozone platform"
 # 3. Set it to "Wayland"
 # 4. Restart chromium
+#
+# ALSO
+# Type chrome://flags/#chrome-labs in the address bar, disable "Chrome Labs", and enable the "Hide Side Panel Button".
 
 sudo dnf install \
 	git \
