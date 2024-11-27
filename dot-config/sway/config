@@ -61,6 +61,10 @@ bindsym {
     XF86AudioPrev exec playerctl previous
 }
 bindsym XF86Search exec $menu
+# toggle wifi
+bindsym --to-code $mod+Ctrl+w exec [ "$(nmcli radio wifi)" = "enabled" ] && nmcli radio wifi off || nmcli radio wifi on
+# toggle internal monitor
+bindsym --to-code $mod+Shift+m exec swaymsg output "eDP-1" toggle
 
 # MacOS-like keybindings
 # You need to have 'wtype' installed 

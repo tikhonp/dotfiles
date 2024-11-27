@@ -4,5 +4,5 @@ swaylock \
     --ignore-empty-password \
     --daemonize \
     --color 000000 \
-    --image /home/tikhon/projects/dotfiles/wallpaper.jpg
+    --image /home/tikhon/pics/locker/image.jpg
 

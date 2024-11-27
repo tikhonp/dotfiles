@@ -25,8 +25,6 @@ alias s=server
 alias d=sway
 alias e='$EDITOR'
 
-alias toggle-display='swaymsg output "eDP-1" toggle'
-
 alias what-playing='xdg-open "https://www.google.com/search?q=$(playerctl metadata --format '\''{{artist}} {{album}}'\'' | sed '\''s/ /+/g'\'')"'
 
 alias jetbrains-toolbox='SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox'
