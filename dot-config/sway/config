@@ -16,7 +16,10 @@ bindsym $mod+Return exec $term
 # https://github.com/Biont/sway-launcher-desktop
 for_window [app_id="^launcher$"] floating enable, sticky enable, resize set 30 ppt 60 ppt, border pixel 1
 set $menu exec $term --class=launcher -e env TERMINAL_COMMAND='$term -e' /home/tikhon/src/sway-launcher-desktop/sway-launcher-desktop.sh
-bindsym --to-code $mod+d exec $menu
+bindsym --to-code {
+    $mod+d exec $menu
+    Ctrl+Space exec $menu
+}
 
 # grim for screenshots
 bindsym --to-code {
@@ -217,7 +220,7 @@ client.unfocused         #333333  #222222     #888888  #292d2e    $clear
 # Status Bar:
 bar {
     position top
-    font pango:Fira Mono 11
+    font pango:Menlo Regular 10
 
     status_command while $HOME/.config/sway/status.sh; do sleep 1; done
 

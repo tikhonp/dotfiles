@@ -53,7 +53,6 @@ sudo dnf remove nano
 
 # sway desktop packages
 sudo dnf install \
-    mozilla-fira-mono-fonts \
     wob \
     brightnessctl \
     wtype \
