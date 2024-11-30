@@ -2,7 +2,7 @@
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo 'Switching to Mac OS...';
-    sudo asahi-bless -n --set-boot-macos -y && sudo reboot;
+    sudo asahi-bless --set-boot-macos -y && sudo reboot;
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     echo 'Switching to Asahi...';
     sudo bless --mount "/Volumes/asahi" --setBoot && sudo reboot;
