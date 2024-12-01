@@ -4,6 +4,8 @@
 ||sentry.io^
 ||sentry-cdn.com^
 ||githubusercontent.com^
+||chatgpt.com^
+||openai.com^
 @@||rutube.ru^
 @@||github.com^
 @@||google.com^
