@@ -220,7 +220,7 @@ client.unfocused         #333333  #222222     #888888  #292d2e    $clear
 # Status Bar:
 bar {
     position top
-    font pango:Menlo Regular 10
+    font pango:Menlo Regular 11
 
     status_command while $HOME/.config/sway/status.sh; do sleep 1; done
 
