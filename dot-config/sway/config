@@ -114,7 +114,7 @@ output * bg #000000 solid_color
 ### Input configuration
 input "1452:850:Apple_MTP_multi-touch" {
     dwt enabled        # Disable while typing
-    scroll_factor 0.15  # Perfect!
+    scroll_factor 0.2  # Perfect!
 }
 input "1452:850:Apple_MTP_keyboard" {
     xkb_model applealu_ansi
