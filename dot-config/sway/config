@@ -64,6 +64,8 @@ bindsym {
     XF86AudioPrev exec playerctl previous
 }
 bindsym XF86Search exec $menu
+bindsym XF86PowerOff exec loginctl lock-session
+
 # toggle wifi
 bindsym --to-code $mod+Ctrl+w exec [ "$(nmcli radio wifi)" = "enabled" ] && nmcli radio wifi off || nmcli radio wifi on
 # toggle internal monitor
@@ -245,5 +247,10 @@ bindsym --to-code $mod+h exec makoctl dismiss -a
 
 # Rescrobbled service 
 exec systemctl --user restart rescrobbled.service
+
+# Fix xdg-desktop-portal-wlr
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway; \
+    systemctl --user stop pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-wlr; \
+    systemctl --user start wireplumber
 
 include @sysconfdir@/sway/config.d/*

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Set tty font
+# Set tty fontset
 # availible tty fonts stored in /usr/lib/kbd/consolefonts
 setfont latarcyrheb-sun32.psfu.gz # permanently
 sudo cp -v /etc/vconsole.conf /etc/vconsole.original
@@ -11,6 +11,8 @@ nmcli device wifi connect <ssid> --ask
 
 # install sway-de
 sudo dnf group install sway-desktop-environment
+# IMPORTAMT check in next reinstall check if xdg-desktop-env-wlr installed 
+# after this
 
 # install chromium
 sudo dnf install fedora-workstation-repositories
@@ -23,6 +25,7 @@ sudo dnf install chromium
 #
 # ALSO
 # Type chrome://flags/#chrome-labs in the address bar, disable "Chrome Labs", and enable the "Hide Side Panel Button".
+# Type chrome://flags/#enable-webrtc-pipewire-camera enable it
 
 sudo dnf install \
 	git \
