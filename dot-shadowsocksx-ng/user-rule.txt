@@ -6,9 +6,11 @@
 ||githubusercontent.com^
 ||chatgpt.com^
 ||openai.com^
+||sprut.ai^
 @@||rutube.ru^
 @@||github.com^
 @@||google.com^
 ||play.google.com^
 ||chess.com^
 ||rutracker.org^
+||discord.com^
