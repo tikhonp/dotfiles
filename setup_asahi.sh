@@ -10,7 +10,7 @@ sudo vi /etc/vconsole.conf
 nmcli device wifi connect <ssid> --ask
 
 # install sway-de
-sudo dnf group install sway-desktop-environment
+sudo dnf install sway-config-fedora
 # IMPORTAMT check in next reinstall check if xdg-desktop-env-wlr installed 
 # after this
 
@@ -60,6 +60,7 @@ sudo dnf install \
     brightnessctl \
     wtype \
     mako \
+    alsa-utils \
 
 
 # new ssh key
