@@ -108,7 +108,8 @@ mv hifi-rs ~/.local/bin
 # https://github.com/InputUsername/rescrobbled
 sudo dnf install cargo rust-libdbus-sys-devel.noarch openssl-devel
 cargo install rescrobbled
-vim ~/.config/rescrobbled/config.toml
+cp dot-config/local/rescrobbled-config.toml ~/.config/rescrobbled/config.toml
+# then run `rescrobbled` in terminal and auth with lastfm
 systemctl --user daemon-reload
 systemctl --user enable rescrobbled.service
 
