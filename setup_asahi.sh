@@ -61,6 +61,7 @@ sudo dnf install \
     wtype \
     mako \
     alsa-utils \
+    google-noto-emoji-fonts \
 
 
 # new ssh key
