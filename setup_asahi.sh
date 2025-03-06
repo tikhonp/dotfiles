@@ -49,6 +49,9 @@ sudo dnf install \
     ImageMagick-devel \
     clang-tools-extra \
 
+# install gopls
+go install golang.org/x/tools/gopls@latest
+
 pip install -U pip
 pip install neovim # install neovim python headers
 
@@ -138,10 +141,8 @@ mkdir -p ~/.docker/completions
 docker completion zsh > ~/.docker/completions/_docker
 
 # Install apple pkl
-sudo dnf install java-latest-openjdk
-curl -Lo ~/.local/bin/pkl 'https://repo1.maven.org/maven2/org/pkl-lang/pkl-cli-java/0.27.0/pkl-cli-java-0.27.0.jar'
+curl -Lo ~/.local/bin/pkl 'https://github.com/apple/pkl/releases/download/0.27.2/pkl-linux-aarch64'
 chmod +x ~/.local/bin/pkl
-go install github.com/apple/pkl-go/cmd/pkl-gen-go@v0.8.0
 
 # install jetbrains toolbox and datagrip
 # https://www.jetbrains.com/toolbox-app/
@@ -169,4 +170,5 @@ sudo widevine-installer
 #
 #
 #   Then restart logind:
-#   sudo systemctl restart systemd-logind
+   sudo systemctl restart systemd-logind
+
