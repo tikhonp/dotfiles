@@ -48,6 +48,7 @@ sudo dnf install \
     fastfetch \
     ImageMagick-devel \
     clang-tools-extra \
+    xxd \
 
 # install gopls
 go install golang.org/x/tools/gopls@latest
@@ -55,6 +56,7 @@ go install golang.org/x/tools/gopls@latest
 pip install -U pip
 pip install neovim # install neovim python headers
 
+# YEAH:))))))))))))))))))
 sudo dnf remove nano
 
 # sway desktop packages
