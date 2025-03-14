@@ -44,8 +44,8 @@ fi
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     addToPath /home/tikhon/.platformio/penv/bin
 
-    # alias get_idf='. $HOME/esp/esp-idf/export.sh'
-    # alias idf=idf.py
+    alias get_idf='. $HOME/esp/esp-idf-v5.4/export.sh'
+    alias idf=idf.py
 
     FPATH="$HOME/.docker/completions:$FPATH"
 
