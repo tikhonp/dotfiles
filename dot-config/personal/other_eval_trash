@@ -47,6 +47,12 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias get_idf='. $HOME/esp/esp-idf-v5.4/export.sh'
     alias idf=idf.py
 
+    # automaticly prepare environment for my esp-idf project
+    tmx_session=$(tmux display-message -p "#S")
+    if [[ -n "$TMUX_PANE" ]] && [[ "$tmx_session" == "telepat-pill-dispenser" ]]; then
+        . "$HOME"/esp/esp-idf-v5.4/export.sh
+    fi
+
     FPATH="$HOME/.docker/completions:$FPATH"
 
 fi
