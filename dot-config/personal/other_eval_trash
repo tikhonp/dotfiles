@@ -48,8 +48,8 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     alias idf=idf.py
 
     # automaticly prepare environment for my esp-idf project
-    tmx_session=$(tmux display-message -p "#S")
-    if [[ -n "$TMUX_PANE" ]] && [[ "$tmx_session" == "telepat-pill-dispenser" ]]; then
+    tmx_session=$(tmux display-message -p "#S" 2> /dev/null)
+    if [[ -n "$TMUX_PANE" ]] && [[ "$tmx_session" == "telepat-pill-dispenser" ]] > /dev/null 2>&1; then
         . "$HOME"/esp/esp-idf-v5.4/export.sh
     fi
 
