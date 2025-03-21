@@ -49,6 +49,8 @@ sudo dnf install \
     ImageMagick-devel \
     clang-tools-extra \
     xxd \
+    cmus \
+    transmission \
 
 # install gopls
 go install golang.org/x/tools/gopls@latest
