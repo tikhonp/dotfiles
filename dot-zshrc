@@ -67,3 +67,7 @@ source $XDG_CONFIG_HOME/local/secrets
 autoload -Uz compinit && compinit
 zinit cdreplay -q
 
+
+export STM32CubeMX_PATH=/Applications/STMicroelectronics/STM32CubeMX.app/Contents/Resources
+
+export STM32_PRG_PATH=/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin
