@@ -30,7 +30,6 @@ brew "imagemagick"
 brew "pkg-config"
 brew "yt-dlp"
 
-brew "swiftlint"
 brew "getsentry/tools/sentry-cli"
 
 cask "appcleaner"
