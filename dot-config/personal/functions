@@ -27,8 +27,10 @@ server() {
         echo "Error: PRIVATE_SSH_SERVERS_PATH is not set";
         return 1;
     fi
-    selected_server=$(fzf --height 20% --layout=reverse --border < "$PRIVATE_SSH_SERVERS_PATH")
-    if [ -n "$selected_server" ]; then
+    selected_line=$(fzf --height 20% --layout=reverse --border < "$PRIVATE_SSH_SERVERS_PATH")
+    if [ -n "$selected_line" ]; then
+        # Extract only the first field (IP/hostname) before any whitespace or comment
+        selected_server=$(echo "$selected_line" | awk '{print $1}')
         ssh "$selected_server"
     fi
 }

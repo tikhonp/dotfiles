@@ -27,7 +27,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     projects_path=$HOME/projects
-    selected=$(find "$projects_path" -maxdepth 1 -not -path "$projects_path" -type d | fzf)
+    selected=$(find "$projects_path" -maxdepth 1 -not -path "$projects_path" -type d | fzf --tmux)
 fi
 
 if [[ -z $selected ]]; then
