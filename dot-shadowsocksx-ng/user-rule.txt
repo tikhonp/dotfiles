@@ -17,3 +17,4 @@
 ||chess.com^
 ||rutracker.org^
 ||discord.com^
+||appstorrent.ru^

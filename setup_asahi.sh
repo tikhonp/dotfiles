@@ -34,7 +34,6 @@ sudo dnf install \
 	nodejs-bash-language-server \
 	neovim \
 	tmux \
-	tldr \
 	go \
 	python3-pip \
 	speedtest-cli \
