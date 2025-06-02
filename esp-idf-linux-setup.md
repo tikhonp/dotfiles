@@ -29,5 +29,7 @@ index bc3e65c59a..e0d1ed7e81 100644
 After install get permissions to board port e.g.:
 
 ```sh
-sudo chmod a+rw /dev/ttyACM0
+sudo usermod -aG dialout $USER
 ```
+
+And reboot, logout didnt worked for me :(
