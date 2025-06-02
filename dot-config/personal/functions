@@ -21,8 +21,13 @@ conf() {
     fi
 }
 
-# Connect ssh server from given list
+# Fetches ssh server from given list
+# Connects to it using command from first arg
 server() {
+    if [ -z "$1" ]; then
+        echo "Error: specify exec for server e.g. 'ssh' or 'ssh-copy-id'";
+        return 1;
+    fi
     if [ -z "$PRIVATE_SSH_SERVERS_PATH" ]; then
         echo "Error: PRIVATE_SSH_SERVERS_PATH is not set";
         return 1;
@@ -31,7 +36,7 @@ server() {
     if [ -n "$selected_line" ]; then
         # Extract only the first field (IP/hostname) before any whitespace or comment
         selected_server=$(echo "$selected_line" | awk '{print $1}')
-        ssh "$selected_server"
+        "$1" "$selected_server"
     fi
 }
 

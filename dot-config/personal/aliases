@@ -21,7 +21,8 @@ alias t="tmux attach || ~/.config/personal/scripts/tmux-sessionizer"
 alias c="clear"
 alias p="cd ~/projects/"
 alias f="fuck"
-alias s=server
+alias s="server ssh"
+alias sci="server ssh-copy-id"
 alias d="/usr/bin/start-sway"
 alias e='$EDITOR'
 

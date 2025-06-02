@@ -112,6 +112,7 @@ sudo ./install.sh -y
 # Setup tailscale
 vpn connect
 curl -fsSL https://tailscale.com/install.sh | sh
+# fix linux DNS: https://tailscale.com/kb/1188/linux-dns#networkmanager--systemd-resolved
 
 # Install docker
 # https://docs.docker.com/engine/install/fedora/
