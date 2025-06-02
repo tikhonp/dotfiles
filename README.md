@@ -59,6 +59,8 @@ stow --target=$HOME . --dotfiles
 
 [Asahi Linux (form minimal) setup](setup_asahi.sh)
 
+[ESP32 IDF setup](esp-idf-linux-setup.md)
+
 ## Some cool stuff
 
 Nothing cool today only boring staff
