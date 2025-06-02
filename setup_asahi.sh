@@ -10,23 +10,20 @@ sudo vi /etc/vconsole.conf
 nmcli device wifi connect <ssid> --ask
 
 # install sway-de
-sudo dnf install sway-config-fedora
-# IMPORTAMT check in next reinstall check if xdg-desktop-env-wlr installed 
-# after this
+sudo dnf install sway-config-fedora xdg-desktop-portal-wlr
+# open DE: /usr/bin/start-sway OR start-sway 
+# cmd+enter opens foot terminal
 
 # install chromium
 sudo dnf install fedora-workstation-repositories
 sudo dnf install chromium
-# WAYLAND SUPORT
-# 1. Go to chrome://flags
-# 2. Search "Preferred Ozone platform"
-# 3. Set it to "Wayland"
-# 4. Restart chromium
-#
-# ALSO
-# Type chrome://flags/#chrome-labs in the address bar, disable "Chrome Labs", and enable the "Hide Side Panel Button".
-# Type chrome://flags/#enable-webrtc-pipewire-camera enable it
+# AND:
+# chrome://flags/#ozone-platform-hint set to "Wayland"
+# chrome://flags/#enable-webrtc-pipewire-camera set to "Enabled"
 
+sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+
+# most wanted packages
 sudo dnf install \
 	git \
 	sl \
@@ -51,15 +48,8 @@ sudo dnf install \
     xxd \
     cmus \
     transmission \
-
-# install gopls
-go install golang.org/x/tools/gopls@latest
-
-pip install -U pip
-pip install neovim # install neovim python headers
-
-# YEAH:))))))))))))))))))
-sudo dnf remove nano
+    zsh \
+    telegram \
 
 # sway desktop packages
 sudo dnf install \
@@ -71,52 +61,44 @@ sudo dnf install \
     google-noto-emoji-fonts \
 
 
-# new ssh key
-ssh-keygen -t ed25519 -C "your_email@example.com"
+# new ssh key to add to github
+ssh-keygen -t ed25519 -C "tikhon.petrishchev@gmail.com"
 wl-copy < ~/.ssh/id_ed25519.pub 
 
 # creating folder for configs
+mkdir ~/src
 mkdir ~/projects
 mkdir ~/projects/sandbox
 mkdir -p ~/.config/systemd/user
 
+cd ~/projects
 git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 cd dotfiles
-stow --target=$HOME . --dotfiles
+stow --target="$HOME" . --dotfiles
 
-sudo dnf install zsh
 chsh -s $(which zsh)
 
 # restart needed here
 
 rm ~/.bash_history ~/.bash_logout ~/.bash_profile ~/.bashrc
 
-# install telegram
-sudo dnf upgrade --refresh
-sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf install telegram
+# install gopls
+go install golang.org/x/tools/gopls@latest
 
-# copy secrets and servers.txt files to ~/.config/local
+# install neovim python headers
+pip install -U pip && pip install neovim 
 
-mkdir ~/src
+# YEAH:))))))))))))))))))
+sudo dnf remove nano
 
-# install launcher
-# https://github.com/Biont/sway-launcher-desktop
-cd ~/src
-git clone git@github.com:Biont/sway-launcher-desktop.git
+# Install hifi-rs https://github.com/iamdb/hifi.rs
+curl -L https://github.com/iamdb/hifi.rs/releases/latest/download/hifi-rs-aarch64-unknown-linux-gnu.tar.gz | tar x -C ~/.local/bin
 
-# hifi-rs
-# https://github.com/iamdb/hifi.rs
-curl -Lo hifi-rs-aarch64-unknown-linux-gnu.tar.gz https://github.com/iamdb/hifi.rs/releases/latest/download/hifi-rs-aarch64-unknown-linux-gnu.tar.gz
-tar xvf hifi-rs-aarch64-unknown-linux-gnu.tar.gz
-rm hifi-rs-aarch64-unknown-linux-gnu.tar.gz
-mv hifi-rs ~/.local/bin
-
-# install rescrobbled
+# Install rescrobbled
 # https://github.com/InputUsername/rescrobbled
 sudo dnf install cargo rust-libdbus-sys-devel.noarch openssl-devel
 cargo install rescrobbled
-cp dot-config/local/rescrobbled-config.toml ~/.config/rescrobbled/config.toml
+mkdir -p ~/.config/rescrobbled/ && cp dot-config/local/rescrobbled-config.toml ~/.config/rescrobbled/config.toml
 # then run `rescrobbled` in terminal and auth with lastfm
 systemctl --user daemon-reload
 systemctl --user enable rescrobbled.service
@@ -138,14 +120,14 @@ sudo dnf -y install dnf-plugins-core
 sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
 sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 # sudo systemctl enable --now docker
-sudo usermod -a -G docker $USER # log out -> log in after
-# ZSH completions
+sudo usermod -a -G docker "$USER" # log out -> log in after
+# Docker ZSH completions
 # https://docs.docker.com/engine/cli/completion/#zsh
 mkdir -p ~/.docker/completions
 docker completion zsh > ~/.docker/completions/_docker
 
 # Install apple pkl
-curl -Lo ~/.local/bin/pkl 'https://github.com/apple/pkl/releases/download/0.27.2/pkl-linux-aarch64'
+curl -Lo ~/.local/bin/pkl 'https://github.com/apple/pkl/releases/latest/download/pkl-linux-aarch64'
 chmod +x ~/.local/bin/pkl
 
 # install jetbrains toolbox and datagrip
@@ -154,9 +136,9 @@ sudo dnf install fuse fuse-libs
 vpn connect
 # https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=linuxARM64
 cd ~/Downloads
-tar xvf jetbrains-toolbox-2.5.2.35332-arm64.tar.gz
-mv jetbrains-toolbox-2.5.2.35332/jetbrains-toolbox ~/.local/bin
-rm -r jetbrains-toolbox-2.5.2.35332 jetbrains-toolbox-2.5.2.35332-arm64.tar.gz
+tar xvf jetbrains-toolbox-...tar.gz
+mv jetbrains-toolbox-.../jetbrains-toolbox ~/.local/bin
+rm -r jetbrains-toolbox-... jetbrains-toolbox-...-arm64.tar.gz
 # run it as:
 SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox
 # enable wayland support for idea:
@@ -166,13 +148,10 @@ SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox
 sudo widevine-installer
 
 # Disable Power BUTTON:
-#
-#   /etc/systemd/logind.conf
-#
+sudo nvim /etc/systemd/logind.conf
+# Place in it:
 #   [Login]
 #   HandlePowerKey=ignore
 #
-#
-#   Then restart logind:
-   sudo systemctl restart systemd-logind
-
+# Then restart logind:
+sudo systemctl restart systemd-logind

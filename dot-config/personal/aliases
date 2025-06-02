@@ -22,7 +22,7 @@ alias c="clear"
 alias p="cd ~/projects/"
 alias f="fuck"
 alias s=server
-alias d=sway
+alias d="/usr/bin/start-sway"
 alias e='$EDITOR'
 
 alias what-playing='xdg-open "https://www.google.com/search?q=$(playerctl metadata --format '\''{{artist}} {{album}}'\'' | sed '\''s/ /+/g'\'')"'
