@@ -57,6 +57,7 @@ sudo dnf install \
     wtype \
     mako \
     alsa-utils \
+    pavucontrol \
     google-noto-emoji-fonts \
 
 
