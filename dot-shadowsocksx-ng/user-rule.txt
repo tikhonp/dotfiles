@@ -21,3 +21,4 @@
 ||qobuz.com^
 ||dl.devmate.com^
 ||jetbrains.com^
+||tailscale.com^
