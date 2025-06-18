@@ -59,7 +59,11 @@ sudo dnf install \
     alsa-utils \
     pavucontrol \
     google-noto-emoji-fonts \
+    thunar \
 
+# dark mode for GTK
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+gsettings set org.gnome.desktop.interface gtk-theme Adwaita-dark
 
 # new ssh key to add to github
 ssh-keygen -t ed25519 -C "tikhon.petrishchev@gmail.com"
