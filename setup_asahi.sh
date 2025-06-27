@@ -59,7 +59,7 @@ sudo dnf install \
     alsa-utils \
     pavucontrol \
     google-noto-emoji-fonts \
-    thunar \
+    nemo \
 
 # dark mode for GTK
 gsettings set org.gnome.desktop.interface color-scheme prefer-dark
@@ -95,8 +95,8 @@ pip install -U pip && pip install neovim
 # YEAH:))))))))))))))))))
 sudo dnf remove nano
 
-# Install hifi-rs https://github.com/iamdb/hifi.rs
-curl -L https://github.com/iamdb/hifi.rs/releases/latest/download/hifi-rs-aarch64-unknown-linux-gnu.tar.gz | tar x -C ~/.local/bin
+# Install qobuz-player (hifi-rs) https://github.com/iamdb/hifi.rs but SofusA version is so much better: at least hi-res works
+curl -L https://github.com/SofusA/qobuz-player/releases/latest/download/qobuz-player-aarch64-unknown-linux-gnu.tar.gz | tar x -C ~/.local/bin
 
 # Install rescrobbled
 # https://github.com/InputUsername/rescrobbled

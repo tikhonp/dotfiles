@@ -20,11 +20,14 @@ alias vpn='sudo vpn'
 alias t="tmux attach || ~/.config/personal/scripts/tmux-sessionizer"
 alias c="clear"
 alias p="cd ~/projects/"
+alias dw="cd ~/Downloads/"
+alias cdw="rm -rf ~/Downloads/*"
 alias f="fuck"
 alias s="server ssh"
 alias sci="server ssh-copy-id"
 alias d="/usr/bin/start-sway"
 alias e='$EDITOR'
+alias gs="git status"
 
 alias what-playing='xdg-open "https://www.google.com/search?q=$(playerctl metadata --format '\''{{artist}} {{album}}'\'' | sed '\''s/ /+/g'\'')"'
 
