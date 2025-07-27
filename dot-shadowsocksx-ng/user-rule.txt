@@ -22,3 +22,7 @@
 ||dl.devmate.com^
 ||jetbrains.com^
 ||tailscale.com^
+||docker.com^
+||stackoverflow.com^
+||weasel.cloud^
+||digitalocean.com^
