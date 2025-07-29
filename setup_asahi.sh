@@ -89,6 +89,9 @@ rm ~/.bash_history ~/.bash_logout ~/.bash_profile ~/.bashrc
 # install gopls
 go install golang.org/x/tools/gopls@latest
 
+# install luals
+curl -L https://github.com/LuaLS/lua-language-server/releases/latest/download/lua-language-server-3.15.0-linux-arm64.tar.gz | tar x -C ~/.local/bin
+
 # install neovim python headers
 pip install -U pip && pip install neovim 
 
