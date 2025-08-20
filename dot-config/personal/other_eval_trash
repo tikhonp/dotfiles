@@ -41,17 +41,18 @@ if [ -d "$HOME/.cargo" ]; then
     # source $HOME/.cargo/env
 fi
 
+alias get_idf='. $HOME/esp/esp-idf-v5.5/export.sh'
+alias idf=idf.py
+
+# automaticly prepare environment for my esp-idf project
+tmx_session=$(tmux display-message -p "#S" 2> /dev/null)
+if [[ -n "$TMUX_PANE" ]] && [[ "$tmx_session" == "telepat-pill-dispenser" ]] > /dev/null 2>&1; then
+    . "$HOME"/esp/esp-idf-v5.5/export.sh
+fi
+
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     addToPath /home/tikhon/.platformio/penv/bin
 
-    alias get_idf='. $HOME/esp/esp-idf-v5.4.2/export.sh'
-    alias idf=idf.py
-
-    # automaticly prepare environment for my esp-idf project
-    tmx_session=$(tmux display-message -p "#S" 2> /dev/null)
-    if [[ -n "$TMUX_PANE" ]] && [[ "$tmx_session" == "telepat-pill-dispenser" ]] > /dev/null 2>&1; then
-        . "$HOME"/esp/esp-idf-v5.4.2/export.sh
-    fi
     FPATH="$HOME/.docker/completions:$FPATH"
 fi
 
