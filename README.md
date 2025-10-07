@@ -22,6 +22,7 @@ xcode-select --install
 
 # Then pass in the Brewfile location...
 brew bundle --file ~/.dotfiles/Brewfile
+# Install shadowsocks NG here: https://github.com/shadowsocks/ShadowsocksX-NG
 
 # ...or move to the directory first.
 cd ~/.dotfiles && brew bundle
