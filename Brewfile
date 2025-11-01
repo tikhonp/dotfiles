@@ -22,6 +22,7 @@ brew "ffmpeg"
 brew "imagemagick"
 brew "pkg-config"
 brew "yt-dlp"
+brew "nmap"
 
 cask "angry-ip-scanner"
 cask "appcleaner"
@@ -58,3 +59,5 @@ mas "Telegram", id: 747648890
 mas "Vimlike", id: 1584519802
 mas "Wipr", id: 1320666476
 mas "Xcode", id: 497799835
+mas "Amphetamine", id: 937984704
+mas "Bitwarden", id: 1352778147

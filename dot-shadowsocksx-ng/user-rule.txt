@@ -16,6 +16,7 @@
 ||play.google.com^
 ||chess.com^
 ||rutracker.org^
+||rutracker.cc^
 ||discord.com^
 ||appstorrent.ru^
 ||qobuz.com^
@@ -26,3 +27,5 @@
 ||stackoverflow.com^
 ||weasel.cloud^
 ||digitalocean.com^
+||askubuntu.com^
+||superuser.com^
