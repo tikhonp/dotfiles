@@ -34,7 +34,7 @@ bindsym --to-code {
     $mod+i exec $XDG_CONFIG_HOME/local/chromium.sh
     $mod+shift+f exec foot # safety option if kitty is not working
     $mod+shift+t exec Telegram
-    $mod+m exec $term qobuz-player -m hifi192 open
+    $mod+m exec $term qobuz-player open
 }
 
 # Wob indicator
