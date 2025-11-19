@@ -145,10 +145,10 @@ vpn connect
 # https://www.jetbrains.com/toolbox-app/download/download-thanks.html?platform=linuxARM64
 cd ~/Downloads
 tar xvf jetbrains-toolbox-...tar.gz
-mv jetbrains-toolbox-.../jetbrains-toolbox ~/.local/bin
-rm -r jetbrains-toolbox-... jetbrains-toolbox-...-arm64.tar.gz
+mv jetbrains-toolbox-.../ ~/src
+cd ~/src/jetbrains-toolbox-.../
 # run it as:
-SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox
+SKIKO_RENDER_API=DIRECT_SOFTWARE ./bin/jetbrains-toolbox
 # enable wayland support for idea:
 # https://blog.jetbrains.com/platform/2024/07/wayland-support-preview-in-2024-2/
 
