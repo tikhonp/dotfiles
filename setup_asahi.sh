@@ -86,8 +86,9 @@ chsh -s $(which zsh)
 
 rm ~/.bash_history ~/.bash_logout ~/.bash_profile ~/.bashrc
 
-# install gopls
+# install gopls and templ 
 go install golang.org/x/tools/gopls@latest
+go install github.com/a-h/templ/cmd/templ@latest
 
 # install luals
 curl -L https://github.com/LuaLS/lua-language-server/releases/latest/download/lua-language-server-3.15.0-linux-arm64.tar.gz | tar x -C ~/.local/bin
