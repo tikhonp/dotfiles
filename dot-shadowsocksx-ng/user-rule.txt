@@ -5,6 +5,7 @@
 ||sentry-cdn.com^
 ||githubusercontent.com^
 ||chatgpt.com^
+||cdn.oaistatic.com^
 ||openai.com^
 ||sprut.ai^
 ||kino.pub^
@@ -29,3 +30,13 @@
 ||digitalocean.com^
 ||askubuntu.com^
 ||superuser.com^
+||m.pushbr.com^
+||nest.com^
+||home.nest.com^
+||reddit.com^
+||httptoolkit.com^
+||play.google.com^
+||linkedin.com^
+||protechts.net^
+||licdn.com^
+||ghcr.io^
