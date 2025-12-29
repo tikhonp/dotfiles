@@ -40,3 +40,5 @@
 ||protechts.net^
 ||licdn.com^
 ||ghcr.io^
+||claude.com^
+||anthropic.com^
