@@ -42,3 +42,5 @@
 ||ghcr.io^
 ||claude.com^
 ||anthropic.com^
+||opensubsonic.netlify.app^
+||oaiusercontent.com^
