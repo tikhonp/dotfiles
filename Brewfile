@@ -63,3 +63,4 @@ mas "Wipr", id: 1320666476
 mas "Xcode", id: 497799835
 mas "Amphetamine", id: 937984704
 mas "Bitwarden", id: 1352778147
+mas "Shadowrocket", id: 932747118
