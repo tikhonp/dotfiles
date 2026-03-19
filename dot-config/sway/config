@@ -19,22 +19,24 @@ bindsym --to-code {
     Ctrl+Space exec $menu
 }
 
+bindsym --to-code $mod+shift+q exec loginctl terminate-user $USER
+
 # grim for screenshots
 bindsym --to-code {
     
     # capture the specified screen area to clipboard    
-    $mod+shift+s exec grim -g "$(slurp -d)" - | wl-copy
+    $mod+shift+s exec grimshot copy area
 
     # capture the focused monitor to clipboard    
-    $mod+shift+d exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') - | wl-copy
+    $mod+shift+d exec grimshot copy active
 }
 
 # Open BASIC GUI apps shortcuts
 bindsym --to-code {
-    $mod+i exec $XDG_CONFIG_HOME/local/chromium.sh
+    $mod+i exec $HOME/.config/local/chromium.sh
     $mod+shift+f exec foot # safety option if kitty is not working
     $mod+shift+t exec Telegram
-    $mod+m exec $term qobuz-player open
+    $mod+m exec $HOME/.config/local/chromium.sh "https://music.tikhonnnnn.com"
 }
 
 # Wob indicator
@@ -86,8 +88,8 @@ bindsym --to-code {
     $mod+r exec wtype -M ctrl -P r
     $mod+y exec wtype -M ctrl -P h
     $mod+l exec wtype -M ctrl -P l
-    Ctrl+p exec wtype -P Up
-    Ctrl+n exec wtype -P Down
+    # Ctrl+p exec wtype -P Up
+    # Ctrl+n exec wtype -P Down
 }
 
 # Idle configuration (swaylock)
@@ -106,15 +108,19 @@ exec LT="$lock_timeout" ST="$screen_timeout" LT=${LT:-300} ST=${ST:-60} && \
         before-sleep $locker \
         lock $locker \
         unlock 'pkill -xu "$USER" -SIGUSR1 swaylock'
-bindsym --to-code $mod+Shift+l exec loginctl lock-session
+bindsym --to-code $mod+Shift+l exec systemctl suspend
 
 ### Output configuration
 output * bg #000000 solid_color
 
+output 'California Institute of Technology 0x1403 Unknown' scale 3
+
 ### Input configuration
-input "1452:850:Apple_MTP_multi-touch" {
+input type:touchpad {
     dwt enabled        # Disable while typing
     scroll_factor 0.2  # Perfect!
+    natural_scroll enabled
+    tap enabled
 }
 input "1452:850:Apple_MTP_keyboard" {
     xkb_model applealu_ansi
@@ -124,7 +130,7 @@ input type:keyboard {
     xkb_layout us,ru
     repeat_rate 45
     repeat_delay 400
-    xkb_options caps:escape,grp:win_space_toggle,grp_led:caps
+    xkb_options caps:escape,grp:win_space_toggle,grp_led:caps,altwin:swap_alt_win
 }
 
 # Drag floating windows by holding down $mod and left mouse button.
@@ -247,8 +253,15 @@ bindsym --to-code $mod+h exec makoctl dismiss -a
 exec systemctl --user restart rescrobbled.service
 
 # Fix xdg-desktop-portal-wlr
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway; \
-    systemctl --user stop pipewire wireplumber xdg-desktop-portal xdg-desktop-portal-wlr; \
-    systemctl --user start wireplumber
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway; \
+#     systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr pipewire pipewire-pulse wireplumber
+exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+
+# Start portals
+exec xdg-desktop-portal
+exec xdg-desktop-portal-wlr
+
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 include @sysconfdir@/sway/config.d/*

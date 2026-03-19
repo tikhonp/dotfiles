@@ -4,10 +4,10 @@
 date_string=$(date +'%d %b %H:%M')
 
 # Keyboard layout
-layout=$(swaymsg -t get_inputs -r | jq '.[] | select(.identifier == "1452:850:Apple_MTP_keyboard" and .type == "keyboard") | .xkb_active_layout_name' -r --unbuffered)
+layout=$(swaymsg -t get_inputs -r | jq '.[] | select(.type == "keyboard") | .xkb_active_layout_name' -r --unbuffered | head -n 1)
 
 # Battery
-battery_string="Battery $(cat /sys/class/power_supply/macsmc-battery/status): $(cat /sys/class/power_supply/macsmc-battery/capacity)%"
+battery_string="Battery $(cat /sys/class/power_supply/BAT0/status): $(cat /sys/class/power_supply/BAT0/capacity)%"
 
 # WIFI
 wifi_status=$(nmcli radio  wifi)
