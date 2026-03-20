@@ -88,8 +88,8 @@ bindsym --to-code {
     $mod+r exec wtype -M ctrl -P r
     $mod+y exec wtype -M ctrl -P h
     $mod+l exec wtype -M ctrl -P l
-    # Ctrl+p exec wtype -P Up
-    # Ctrl+n exec wtype -P Down
+    Ctrl+p exec wtype -P Up
+    Ctrl+n exec wtype -P Down
 }
 
 # Idle configuration (swaylock)
