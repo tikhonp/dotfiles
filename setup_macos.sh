@@ -14,13 +14,22 @@ export SSH_AUTH_SOCK=/Users/tikhon/.bitwarden-ssh-agent.sock
 
 # 5. Create `~/projects` folder
 mkdir -p ~/projects
+# so not all dot-config will not symlinked
+mkdir -p ~/.config 
+mkdir -p ~/projects/sandbox
 
 # 6. Clone repo into newly created
 cd ~/projects
 git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 
 # 7. Create symlinks in the Home directory to the real files in the repo.
-# so not all dot-config will not symlinked
-mkdir -p ~/.config 
 cd ~/projects/dotfiles
 stow --target=$HOME . --dotfiles
+
+# 8. Install office from appstorrent
+
+# 9. Install audio plugins:
+#  - Focusrite
+#  - Softube reverb
+#  - Fabfilter
+#  - Izotope Ozone
