@@ -17,13 +17,10 @@ mkdir -p ~/projects
 
 # 6. Clone repo into newly created
 cd ~/projects
-git clone git@github.com:TikhonP/dotfiles.git
+git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 
-7. Create symlinks in the Home directory to the real files in the repo.
-
-```zsh
-mkdir ~/.config # so not all dot-config will not symlinked
-
+# 7. Create symlinks in the Home directory to the real files in the repo.
+# so not all dot-config will not symlinked
+mkdir -p ~/.config 
+cd ~/projects/dotfiles
 stow --target=$HOME . --dotfiles
-```
-
