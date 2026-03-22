@@ -7,6 +7,8 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
 # MACOS STAFF
 
+export SSH_AUTH_SOCK=/Users/tikhon/.bitwarden-ssh-agent.sock
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
