@@ -13,7 +13,8 @@ set $term_cwd $term --working-directory "$(swaycwd 2>/dev/null || echo $HOME)"
 bindsym $mod+Return exec $term
 
 set $rofi_cmd rofi -terminal '$term'
-set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+# set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+set $menu $rofi_cmd -show drun
 bindsym --to-code {
     $mod+d exec $menu
     Ctrl+Space exec $menu
@@ -113,7 +114,9 @@ bindsym --to-code $mod+Shift+l exec systemctl suspend
 ### Output configuration
 output * bg #000000 solid_color
 
-output 'California Institute of Technology 0x1403 Unknown' scale 3
+output "eDP-1" scale 2.6
+
+output "HDMI-A-1" scale 1.5
 
 ### Input configuration
 input type:touchpad {
@@ -121,6 +124,9 @@ input type:touchpad {
     scroll_factor 0.2  # Perfect!
     natural_scroll enabled
     tap enabled
+
+    accel_profile "adaptive"
+    pointer_accel 0.4
 }
 input "1452:850:Apple_MTP_keyboard" {
     xkb_model applealu_ansi
@@ -228,7 +234,8 @@ bar {
     position top
     font pango:Menlo Regular 13
 
-    status_command while $HOME/.config/sway/status.sh; do sleep 1; done
+    # status_command while $HOME/.config/sway/status.sh; do sleep 1; done
+    status_command i3status
 
     colors {
         statusline #ffffff

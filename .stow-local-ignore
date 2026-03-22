@@ -10,3 +10,6 @@ Brewfile
 wallpaper.jpg
 setup_asahi.sh
 esp-idf-linux-setup.md
+tmp/
+shadowrocket/
+setup_macos.sh
