@@ -40,6 +40,7 @@ cask "docker-desktop"
 cask "tailscale-app"
 cask "bluos-controller"
 cask "flacon"
+cask "bitwarden"
 
 tap "getsentry/tools"
 brew "getsentry/tools/sentry-cli"
@@ -62,5 +63,4 @@ mas "Vimlike", id: 1584519802
 mas "Wipr", id: 1320666476
 mas "Xcode", id: 497799835
 mas "Amphetamine", id: 937984704
-mas "Bitwarden", id: 1352778147
 mas "Shadowrocket", id: 932747118
