@@ -26,9 +26,12 @@ git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 cd ~/projects/dotfiles
 stow --target=$HOME . --dotfiles
 
-# 8. Install office from appstorrent
+# 8. Modify kitty conf font to `17`
+#  BTW i dont know how to make kitty config varible based on platform, so i just set it to 17
 
-# 9. Install audio plugins:
+# 9. Install office from appstorrent
+
+# 10. Install audio plugins:
 #  - Focusrite
 #  - Softube reverb
 #  - Fabfilter
