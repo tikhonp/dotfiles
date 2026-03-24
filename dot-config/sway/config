@@ -116,7 +116,7 @@ output * bg #000000 solid_color
 
 output "eDP-1" scale 2.6
 
-output "HDMI-A-1" scale 1.5
+output "HDMI-A-1" scale 1.6
 
 ### Input configuration
 input type:touchpad {
