@@ -56,5 +56,7 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     addToPath /home/tikhon/.platformio/penv/bin
 
     FPATH="$HOME/.docker/completions:$FPATH"
+    
+    export SSH_AUTH_SOCK=/home/tikhon/.bitwarden-ssh-agent.sock
 fi
 
