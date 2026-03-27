@@ -8,15 +8,10 @@ set $down j
 set $up k
 set $right l
 
-# Kitty as terminal (mod+enter)
-# https://sw.kovidgoyal.net/kitty/
-set $term /usr/bin/kitty
-set $term_cwd $term --working-directory "$(swaycwd 2>/dev/null || echo $HOME)"
+set $term kitty
 bindsym $mod+Return exec $term
 
-set $rofi_cmd rofi -terminal '$term'
-# set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
-set $menu $rofi_cmd -show drun
+set $menu wmenu-run -f "pango:Menlo Regular 14" -i -N 000000
 bindsym --to-code {
     $mod+d exec $menu
     Ctrl+Space exec $menu
