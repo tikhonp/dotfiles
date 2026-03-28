@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Sway (dotfiles)
+Comment=An i3-compatible Wayland compositor
+Exec=/home/tikhon/.config/personal/scripts/start-sway.sh
+Type=Application
+DesktopNames=sway;wlroots

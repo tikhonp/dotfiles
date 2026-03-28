@@ -229,7 +229,6 @@ bar {
     position top
     font pango:Menlo Regular 13
 
-    # status_command while $HOME/.config/sway/status.sh; do sleep 1; done
     status_command i3status
 
     colors {
