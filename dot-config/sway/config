@@ -1,7 +1,5 @@
 # :) 
 
-include @sysconfdir@/sway/config.d/*
-
 set $mod Mod4
 set $left h
 set $down j
@@ -10,6 +8,8 @@ set $right l
 
 set $term kitty
 bindsym $mod+Return exec $term
+
+exec_always "$HOME/.config/personal/scripts/wayland-startup.sh"
 
 set $menu wmenu-run -f "pango:Menlo Regular 14" -i -N 000000
 bindsym --to-code {
@@ -224,7 +224,6 @@ set $clear #ffffff00
 client.focused_inactive  #333333  #5f676a     #ffffff  #484e50    $clear
 client.unfocused         #333333  #222222     #888888  #292d2e    $clear
 
-# Status Bar:
 bar {
     position top
     font pango:Menlo Regular 13
@@ -243,7 +242,6 @@ for_window {
     [app_id="google-chrome"] mark Browser
     [con_mark="Browser"] inhibit_idle
     [app_id="(?i).*pavucontrol|blueman-manager.*"] floating enable; move position center; resize set 70ppt 75ppt
-    # xdg-desktop-portal
     [app_id="(?i).*xdg-desktop-portal-gtk.*"] floating enable; move position center; resize set 70ppt 75ppt
     [class="(?i).*xdg-desktop-portal-gtk.*"] floating enable; move position center; resize set 70ppt 75ppt
     [window_type="dialog"] floating enable; move position center
@@ -251,6 +249,10 @@ for_window {
     [window_type="popup_menu"] floating enable; move position center
 }
 
+# Notifications using mako
+bindsym --to-code $mod+h exec makoctl dismiss -a
+
+# Start default opened applications
 assign {
     [app_id="kitty"] 1
     [app_id="google-chrome"] 2
@@ -258,29 +260,10 @@ assign {
     [app_id="firefox"] 4
     [app_id="Bitwarden"] 10
 }
-
-# Notifications using mako
-# https://github.com/emersion/mako
-exec mako
-bindsym --to-code $mod+h exec makoctl dismiss -a
-
-# Rescrobbled service 
-exec systemctl --user restart rescrobbled.service
-
-# Fix xdg-desktop-portal-wlr
-# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway; \
-#     systemctl --user restart xdg-desktop-portal xdg-desktop-portal-wlr pipewire pipewire-pulse wireplumber
-exec systemctl --user set-environment XDG_CURRENT_DESKTOP=sway
-exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP ELECTRON_OZONE_PLATFORM_HINT
-
-# Start portals
-exec xdg-desktop-portal
-exec xdg-desktop-portal-wlr
-
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-
 exec $term
 exec google-chrome-stable
 exec Telegram
 exec $music
 exec ELECTRON_OZONE_PLATFORM_HINT=wayland bitwarden-desktop
+
+include /etc/sway/config.d/*
