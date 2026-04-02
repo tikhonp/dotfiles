@@ -9,6 +9,10 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
 export SSH_AUTH_SOCK=/Users/tikhon/.bitwarden-ssh-agent.sock
 
+# this is for nvim im making it platform dependant
+# maybe if the next var is nil default option will be used
+# export TYPST_BROWSER_OPEN_CMD='open %s'
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -58,5 +62,10 @@ if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     FPATH="$HOME/.docker/completions:$FPATH"
     
     export SSH_AUTH_SOCK=/home/tikhon/.bitwarden-ssh-agent.sock
+
+    alias open=xdg-open
+
+    # this is for nvim im making it platform dependant
+    export TYPST_BROWSER_OPEN_CMD='google-chrome-stable --app=%s'
 fi
 
