@@ -95,6 +95,8 @@ bindsym --to-code {
     Ctrl+n exec wtype -P Down
 }
 
+bindsym --to-code Ctrl+Shift+p exec wtype -M ctrl -P p
+
 # Idle configuration (swaylock)
 # https://github.com/swaywm/swaylock
 # https://gitlab.com/fedora/sigs/sway/sway-config-fedora/-/blob/fedora/sway/config.d/90-swayidle.conf
