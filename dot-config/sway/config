@@ -49,6 +49,17 @@ bindsym --locked {
         | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob 
     Shift+XF86AudioLowerVolume exec amixer set Master 1%- unmute \
         | sed -En 's/.*\[([0-9]+)%\].*/\1/p' | head -1 > $SWAYSOCK.wob
+
+    # oppo HA-1
+    Ctrl+Shift+XF86AudioRaiseVolume exec "$HOME/.config/personal/oppo_controller/env/bin/python" \
+        "$HOME/.config/personal/oppo_controller/main.py" --up && \
+        echo 100 > $SWAYSOCK.wob
+    Ctrl+Shift+XF86AudioLowerVolume exec "$HOME/.config/personal/oppo_controller/env/bin/python" \
+        "$HOME/.config/personal/oppo_controller/main.py" --down && \
+        echo 100 > $SWAYSOCK.wob
+    Ctrl+Shift+XF86AudioMute exec "$HOME/.config/personal/oppo_controller/env/bin/python" \
+        "$HOME/.config/personal/oppo_controller/main.py" --onoff && \
+        echo 100 > $SWAYSOCK.wob
 }
 
 bindsym XF86AudioMicMute exec amixer set Capture toggle
