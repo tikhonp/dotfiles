@@ -75,8 +75,11 @@ bindsym {
 bindsym {
     XF86AudioPlay exec playerctl play-pause
     Pause exec playerctl play-pause
+
     XF86AudioNext exec playerctl next
     XF86AudioPrev exec playerctl previous
+    Ctrl+Shift+Right exec playerctl next
+    Ctrl+Shift+Left exec playerctl previous
 }
 bindsym XF86Search exec $menu
 bindsym XF86PowerOff exec loginctl lock-session
