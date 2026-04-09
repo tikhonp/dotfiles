@@ -13,6 +13,8 @@ brew "neovim"
 brew "tmux"
 brew "tree"
 brew "zsh-autosuggestions"
+brew "tree-sitter"
+brew "tree-sitter-cli"
 
 brew "go"
 brew "pkl"
