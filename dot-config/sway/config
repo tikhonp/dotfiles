@@ -114,20 +114,21 @@ bindsym --to-code Ctrl+Shift+p exec wtype -M ctrl -P p
 # Idle configuration (swaylock)
 # https://github.com/swaywm/swaylock
 # https://gitlab.com/fedora/sigs/sway/sway-config-fedora/-/blob/fedora/sway/config.d/90-swayidle.conf
+set $poweroff_display_cmd "$HOME/.config/personal/scripts/display-power-if-battery.sh"
 set $lock_cmd 'swaylock --daemonize --color 000000 --image "$HOME/projects/dotfiles/wallpaper.jpg"'
 set $lock_timeout 300
-set $screen_timeout 250
+set $screen_timeout 60
 exec LT="$lock_timeout" ST="$screen_timeout" LT=${LT:-300} ST=${ST:-60} && \
     swayidle -w \
         timeout $LT $lock_cmd \
-        timeout $((LT + ST)) 'swaymsg "output * power off"' \
-                      resume 'swaymsg "output * power on"'  \
-        timeout $ST 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power off"' \
-             resume 'pgrep -xu "$USER" swaylock >/dev/null && swaymsg "output * power on"'  \
+        timeout $((LT + ST)) '$poweroff_display_cmd off' \
+                      resume '$poweroff_display_cmd on'  \
+        timeout $ST 'pgrep -xu "$USER" swaylock >/dev/null && $poweroff_display_cmd off"' \
+             resume 'pgrep -xu "$USER" swaylock >/dev/null && $poweroff_display_cmd on"'  \
         before-sleep $lock_cmd \
         lock $lock_cmd \
         unlock 'pkill -xu "$USER" -SIGUSR1 swaylock'
-bindsym --to-code $mod+Shift+l exec systemctl suspend
+bindsym --to-code $mod+Shift+l exec loginctl lock-session
 
 ### Output configuration
 output * bg #000000 solid_color
