@@ -4,3 +4,5 @@ dot-shadowsocksx-ng/*
 !dot-shadowsocksx-ng/user-rule.txt
 
 dot-fonts/.uuid
+
+llmtmp/

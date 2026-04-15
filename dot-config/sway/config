@@ -281,6 +281,13 @@ set $music firefox --kiosk "https://music.tikhonnnnn.com"
 bindsym --to-code $mod+m exec $music
 exec $music
 
+assign [app_id="kitty-singbox"] 9
+set $kitty-singbox kitty --app-id kitty-singbox --title "sing-box" \
+    /usr/bin/sing-box run -c ~/projects/dotfiles/dot-config/local/singbox-config.json
+for_window [app_id="kitty-singbox"] border normal 1, title_format "sing-box"
+bindsym --to-code $mod+Ctrl+v exec $kitty-singbox
+exec kitty-singbox
+
 assign [app_id="Bitwarden"] 10
 set $bitwrdn ELECTRON_OZONE_PLATFORM_HINT=wayland bitwarden-desktop
 bindsym --to-code $mod+b exec $bitwrdn
