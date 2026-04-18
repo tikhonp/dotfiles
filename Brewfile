@@ -43,6 +43,7 @@ cask "tailscale-app"
 cask "bluos-controller"
 cask "flacon"
 cask "bitwarden"
+cask "winbox"
 
 tap "getsentry/tools"
 brew "getsentry/tools/sentry-cli"
