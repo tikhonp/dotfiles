@@ -23,6 +23,14 @@ conf() {
 
 # Fetches ssh server from given list
 # Connects to it using command from first arg
+#
+# i have a file with lines like this:
+#
+#    ssh user@host -p 22 # my server
+#    host # is optional comment, and ssh command can be any command with args, e.g. ssh-copy-id
+#    another-host 
+#    -J user@jump-host host # and so on
+#
 server() {
     if [ -z "$1" ]; then
         echo "Error: specify exec for server e.g. 'ssh' or 'ssh-copy-id'";
@@ -34,9 +42,9 @@ server() {
     fi
     selected_line=$(fzf --height 20% --layout=reverse --border < "$PRIVATE_SSH_SERVERS_PATH")
     if [ -n "$selected_line" ]; then
-        # Extract only the first field (IP/hostname) before any whitespace or comment
-        selected_server=$(echo "$selected_line" | awk '{print $1}')
-        "$1" "$selected_server"
+        selected_args=$(echo "${selected_line%%#*}" | xargs)
+        args=(${=selected_args})
+        "$1" "${args[@]}"
     fi
 }
 
