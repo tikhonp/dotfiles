@@ -37,3 +37,5 @@
 
 [submodule]
 	recurse = true
+[merge]
+	tool = nvimdiff
