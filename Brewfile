@@ -21,6 +21,8 @@ brew "go"
 brew "pkl"
 brew "luarocks"
 brew "python-lsp-server"
+brew "typst"
+brew "tinymist"
 
 brew "ffmpeg"
 brew "imagemagick"
