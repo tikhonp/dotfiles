@@ -64,6 +64,9 @@ bindsym --locked {
 
 bindsym XF86AudioMicMute exec amixer set Capture toggle
 
+# wifi toggle
+bindsym $mod+Ctrl+w exec sh -c 'nmcli -t -f WIFI g | grep -qx enabled && nmcli radio wifi off || nmcli radio wifi on'
+
 # Brightness controls
 bindsym {
     XF86MonBrightnessUp exec brightnessctl set 5%+ | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $SWAYSOCK.wob
