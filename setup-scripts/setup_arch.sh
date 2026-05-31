@@ -32,20 +32,17 @@ pacman -S --needed \
     clang-tools-extra \
     xxd \
     zsh \
-
-pacman -S --needed \
     transmission-gtk \
     telegram-desktop \
     pavucontrol \
     bitwarden \
     firefox \
-
-pacman -S --needed \
     wob \
     wtype \
     mako \
     i3status \
     wmenu \
+    
     # brightnessctl \
     # foot \
     # grim \
