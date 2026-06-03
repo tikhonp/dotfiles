@@ -1,7 +1,6 @@
 brew "sl"
 brew "cmatrix"
 brew "cowsay"
-brew "thefuck"
 
 brew "stow"
 brew "fd"

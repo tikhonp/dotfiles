@@ -9,18 +9,10 @@
 
 # Im starting setup arch script for know just to save some notes
 
-# Install paru AUR helper:
-sudo pacman -S --needed base-devel git
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-cd ..
-rm -rf paru
-
-# Install google-chrome:
-paru -S --needed google-chrome
-
 pacman -S --needed \
+    base-devel \
+    git \
+    less \
     sl \
     cmatrix \
     cowsay \
@@ -43,18 +35,48 @@ pacman -S --needed \
     pavucontrol \
     bitwarden \
     firefox \
+    opencode \
     wob \
     wtype \
+    docker \
+    docker-compose \
+    docker-buildx \
+    brightnessctl \
+    foot \
+    grim \
+    i3status \
+    libpulse \
+    mako \
+    polkit \
+    sway-contrib swaybg \
+    swayidle \
+    swaylock \
+    wmenu \
+    xdg-desktop-portal-gtk \
+    xdg-desktop-portal-wlr \
+    xorg-xwayland \
+    zsh-completions \
+    npm \
+    tree-sitter \
+    tree-sitter-cli \
 
-pacman -S --needed \
-    brightnessctl foot grim i3status libpulse mako polkit sway-contrib swaybg \
-    swayidle swaylock wmenu xdg-desktop-portal-gtk xdg-desktop-portal-wlr xorg-xwayland
+# Install paru AUR helper:
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd ..
+rm -rf paru
+
+# Install google-chrome:
+paru -S --needed google-chrome
 
 mkdir ~/src
 mkdir ~/projects
 mkdir ~/projects/sandbox
 
-cd ~/projects
+# setup bitwarden
+#  export SSH_AUTH_SOCK=/home/tikhon/.bitwarden-ssh-agent.sock
+#  ssh -L
 git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 cd dotfiles
 stow --target="$HOME" . --dotfiles
@@ -65,3 +87,19 @@ ln -s /home/tikhon/projects/dotfiles/usr/share/wayland-sessions/dotfiles-sway.de
 
 # tailscale 
 curl -fsSL https://tailscale.com/install.sh | sh
+
+# 86 is ID of OPPO DAC in sinks:
+#  86. OPPO HA-1 USB AUDIO 2.0 DAC Analog Stereo [vol: 0.40]
+#  wpctl status
+#
+# wpctl set-volume 86 1.0
+
+# VPN 
+paru -S sing-box
+# and sungbox launcher
+
+sudo usermod -aG docker $USER
+
+# install gopls and templ 
+go install golang.org/x/tools/gopls@latest
+go install github.com/a-h/templ/cmd/templ@latest
