@@ -103,3 +103,10 @@ sudo usermod -aG docker $USER
 # install gopls and templ 
 go install golang.org/x/tools/gopls@latest
 go install github.com/a-h/templ/cmd/templ@latest
+
+# oppo remote control:
+cd "$HOME/.config/personal/oppo_controller"
+python -m venv env
+. env/bin/activate
+pip install -U pip
+pip install -r requirements.txt

@@ -292,7 +292,7 @@ exec $music
 
 assign [app_id="kitty-singbox"] 9
 set $kitty-singbox kitty --app-id kitty-singbox --title "sing-box" \
-    /usr/bin/sing-box run -c ~/projects/dotfiles/dot-config/local/singbox-config.json
+    /usr/bin/sing-box run -c /home/tikhon/src/singbox-launcher/bin/config.json
 for_window [app_id="kitty-singbox"] border normal 1, title_format "sing-box"
 bindsym --to-code $mod+Ctrl+v exec $kitty-singbox
 exec kitty-singbox
