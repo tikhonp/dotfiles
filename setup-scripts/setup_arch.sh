@@ -9,6 +9,9 @@
 
 # Im starting setup arch script for know just to save some notes
 
+# tty font
+sudo sed -i 's/^FONT=.*/FONT=latarcyrheb-sun32/' /etc/vconsole.conf
+
 pacman -S --needed \
     base-devel \
     git \
@@ -59,6 +62,8 @@ pacman -S --needed \
     npm \
     tree-sitter \
     tree-sitter-cli \
+    lua-language-server \
+    wl-mirror \
 
 # Install paru AUR helper:
 git clone https://aur.archlinux.org/paru.git

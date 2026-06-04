@@ -228,6 +228,9 @@ bindsym $mod+Ctrl+f fullscreen
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
 
+# Mirror the current output to a new window, which is useful for picture-in-picture or screen sharing
+bindsym --to-code $mod+Shift+m exec wl-mirror eDP-1 | swaymsg "[title='wl-mirror'] fullscreen"
+
 # Resizing containers:
 mode "resize" {
     bindsym --to-code $left resize shrink width 10px
