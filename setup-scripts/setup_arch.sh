@@ -64,6 +64,7 @@ pacman -S --needed \
     tree-sitter-cli \
     lua-language-server \
     wl-mirror \
+    man \
 
 # Install paru AUR helper:
 git clone https://aur.archlinux.org/paru.git

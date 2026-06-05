@@ -88,6 +88,9 @@ bindsym XF86Search exec $menu
 bindsym XF86PowerOff exec loginctl lock-session
 
 bindsym --locked XF86Display exec swaymsg output eDP-1 toggle
+bindsym --locked Shift+XF86Display exec swaymsg output '"LG Electronics LG HDR QHD 006NTLEBG776"' toggle
+# Mirror the current output to a new window, which is useful for picture-in-picture or screen sharing
+bindsym Ctrl+Shift+XF86Display exec wl-mirror eDP-1 | swaymsg "[title='wl-mirror'] fullscreen"
 
 bindsym XF86NotificationCenter exec makoctl restore
 
@@ -227,9 +230,6 @@ bindsym {
 bindsym $mod+Ctrl+f fullscreen
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
-
-# Mirror the current output to a new window, which is useful for picture-in-picture or screen sharing
-bindsym --to-code $mod+Shift+m exec wl-mirror eDP-1 | swaymsg "[title='wl-mirror'] fullscreen"
 
 # Resizing containers:
 mode "resize" {
