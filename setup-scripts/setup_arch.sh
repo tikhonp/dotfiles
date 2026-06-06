@@ -65,6 +65,8 @@ pacman -S --needed \
     lua-language-server \
     wl-mirror \
     man \
+    easyeffects \
+    lsp-plugins-lv2 \
 
 # Install paru AUR helper:
 git clone https://aur.archlinux.org/paru.git
@@ -116,3 +118,5 @@ python -m venv env
 . env/bin/activate
 pip install -U pip
 pip install -r requirements.txt
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/EasyEffects-Presets/master/install.sh)"
