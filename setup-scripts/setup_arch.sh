@@ -67,6 +67,7 @@ pacman -S --needed \
     man \
     easyeffects \
     lsp-plugins-lv2 \
+    unrar \
 
 # Install paru AUR helper:
 git clone https://aur.archlinux.org/paru.git
