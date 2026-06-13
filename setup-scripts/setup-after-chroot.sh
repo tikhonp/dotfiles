@@ -61,6 +61,8 @@ sudo pacman -S --needed --noconfirm \
     easyeffects \
     lsp-plugins-lv2 \
     unrar \
+    kicad kicad-library kicad-library-3d kicad-demos \
+    freecad \
 
 # Install paru AUR helper:
 git clone https://aur.archlinux.org/paru.git
@@ -70,7 +72,7 @@ cd ..
 rm -rf paru
 
 # Install google-chrome:
-paru -S --needed --noconfirm google-chrome
+paru -S --needed --noconfirm google-chrome sing-box
 
 mkdir ~/src
 mkdir ~/projects
@@ -86,6 +88,7 @@ cat > "$TEMP_KEY"
 # Add to ssh-agent
 ssh-add "$TEMP_KEY"
 
+cd ~/projects
 git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 
 ssh-add -d "$TEMP_KEY"
@@ -101,10 +104,7 @@ sudo ln -s /home/tikhon/projects/dotfiles/usr/share/wayland-sessions/dotfiles-sw
 # tailscale 
 curl -fsSL https://tailscale.com/install.sh | sh
 
-# VPN 
-paru -S sing-box
-# and sungbox launcher
-
+# docker
 sudo usermod -aG docker $USER
 
 # install gopls and templ 
@@ -119,3 +119,13 @@ pip install -U pip
 pip install -r requirements.txt
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/EasyEffects-Presets/master/install.sh)"
+
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/tikhonp/dotfiles/refs/heads/main/setup-scripts/setup-hibernate.sh)"
+
+cd ~/src
+git clone https://github.com/Leadaxe/singbox-launcher.git
+cd singbox-launcher
+./build/build_linux.sh
+chmod +x singbox-launcher
+
+cd

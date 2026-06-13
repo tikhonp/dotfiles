@@ -14,13 +14,11 @@
 # /dev/nvme0n1p2  2099200   69208063  67108864    32G Linux swap
 # /dev/nvme0n1p3 69208064 1000214527 931006464 443.9G Linux root (x86-64)
 
+# setup after chroot:
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/tikhonp/dotfiles/refs/heads/main/setup-scripts/setup-after-chroot.sh)"
+
 # 86 is ID of OPPO DAC in sinks:
 #  86. OPPO HA-1 USB AUDIO 2.0 DAC Analog Stereo [vol: 0.40]
 #  wpctl status
 #
 # wpctl set-volume 86 1.0
-
-
-# setup bitwarden
-#  export SSH_AUTH_SOCK=/home/tikhon/.bitwarden-ssh-agent.sock
-#  ssh -L
