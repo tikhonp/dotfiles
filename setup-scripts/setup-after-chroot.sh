@@ -1,9 +1,18 @@
 #!/bin/bash
+#
+# Post-chroot provisioning for Arch + Sway.
+# Run as user `tikhon` (uses sudo for the root-only steps).
+# Invoked from setup_arch.sh after the base system + user exist.
 
-su - tikhon
+set -uo pipefail
 
-# tty font
+# Drop to the user account if invoked as root.
+[ "$(id -un)" != tikhon ] && exec su - tikhon
+
+
+# Larger TTY font for HiDPI.
 sudo sed -i 's/^FONT=.*/FONT=latarcyrheb-sun32/' /etc/vconsole.conf
+
 
 sudo pacman -S --needed --noconfirm \
     base-devel \
@@ -64,68 +73,73 @@ sudo pacman -S --needed --noconfirm \
     kicad kicad-library kicad-library-3d kicad-demos \
     freecad \
 
-# Install paru AUR helper:
+
+
+# Bootstrap paru.
 git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si --noconfirm
-cd ..
+(cd paru && makepkg -si --noconfirm)
 rm -rf paru
 
-# Install google-chrome:
 paru -S --needed --noconfirm google-chrome sing-box
 
-mkdir ~/src
-mkdir ~/projects
-mkdir ~/projects/sandbox
 
-# ssh-key for clonning
+# Directories
+mkdir -p ~/src ~/projects/sandbox
+
+
+# Dotfiles
+
+# Load an SSH key into the agent so we can clone over git@.
 eval "$(ssh-agent -s)"
-# Create temp file for key
 TEMP_KEY="/tmp/temp_ssh_key_$RANDOM"
-# Prompt for key content (multi-line)
 echo "Paste your SSH private key content (end with empty line):"
 cat > "$TEMP_KEY"
-# Add to ssh-agent
 ssh-add "$TEMP_KEY"
 
-cd ~/projects
-git clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
+git -C ~/projects clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
 
 ssh-add -d "$TEMP_KEY"
 rm -f "$TEMP_KEY"
 
-cd dotfiles
-stow --target="$HOME" . --dotfiles
+# Deploy with stow.
+(cd ~/projects/dotfiles && stow --target="$HOME" . --dotfiles)
 
-# to start sway link custom desktop file:
+# Register the custom Sway session for the display manager.
 sudo ln -s /home/tikhon/projects/dotfiles/usr/share/wayland-sessions/dotfiles-sway.desktop \
     /usr/share/wayland-sessions/dotfiles-sway.desktop
 
-# tailscale 
+
+# Tailscale.
 curl -fsSL https://tailscale.com/install.sh | sh
 
-# docker
-sudo usermod -aG docker $USER
+# Docker (rootless access for the user).
+sudo usermod -aG docker "$USER"
 
-# install gopls and templ 
+
+# Go language server + templ.
 go install golang.org/x/tools/gopls@latest
 go install github.com/a-h/templ/cmd/templ@latest
 
-# oppo remote control:
-cd "$HOME/.config/personal/oppo_controller"
-python -m venv env
-. env/bin/activate
-pip install -U pip
-pip install -r requirements.txt
+# OPPO DAC remote control venv.
+(
+    cd "$HOME/.config/personal/oppo_controller"
+    python -m venv env
+    . env/bin/activate
+    pip install -U pip
+    pip install -r requirements.txt
+)
 
+
+# EasyEffects presets.
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/JackHack96/EasyEffects-Presets/master/install.sh)"
 
+# Hibernate setup.
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/tikhonp/dotfiles/refs/heads/main/setup-scripts/setup-hibernate.sh)"
 
-cd ~/src
-git clone https://github.com/Leadaxe/singbox-launcher.git
-cd singbox-launcher
-./build/build_linux.sh
-chmod +x singbox-launcher
-
-cd
+# sing-box launcher GUI.
+git -C ~/src clone https://github.com/Leadaxe/singbox-launcher.git
+(
+    cd ~/src/singbox-launcher
+    ./build/build_linux.sh
+    chmod +x singbox-launcher
+)

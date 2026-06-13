@@ -22,9 +22,6 @@
     lab = !echo 'Difference between git and GitLab is like between porn and PornoLab' | cowsay
     vim = !nvim +Git
 
-[pull]
-	ff = only
-
 [core]
 	ignorecase = false
 
@@ -37,5 +34,6 @@
 
 [submodule]
 	recurse = true
+
 [merge]
 	tool = nvimdiff

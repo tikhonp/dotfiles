@@ -32,3 +32,5 @@ alias gs="git status"
 alias what-playing='xdg-open "https://www.google.com/search?q=$(playerctl metadata --format '\''{{artist}} {{album}}'\'' | sed '\''s/ /+/g'\'')"'
 
 alias jetbrains-toolbox='SKIKO_RENDER_API=DIRECT_SOFTWARE jetbrains-toolbox'
+
+alias ipv6d="sudo sysctl -w net.ipv6.conf.all.disable_ipv6=1"
