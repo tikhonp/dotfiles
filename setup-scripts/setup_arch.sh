@@ -5,11 +5,13 @@
 # Setup password for root user (passwd)
 # Check machine ip address (ip a)
 # ssh into the machine from another one
+# delete all uefi boot entries (efibootmgr -b 0000 -B, repeat for all entries)
 # run "archinstall":
-curl -fsSL -o user_configuration.json "https://raw.githubusercontent.com/tikhonp/dotfiles/refs/heads/main/setup-scripts/archinstall_user_configuration.json"
-archinstall --config user_configuration.json
+curl -fsSL -o user_configuration.json "https://raw.githubusercontent.com/tikhonp/dotfiles/refs/heads/main/setup-scripts/archinstall_user_configuration.json" && archinstall --config user_configuration.json
 # setup after chroot:
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/tikhonp/dotfiles/refs/heads/main/setup-scripts/setup-after-chroot.sh)"
+# exit chroot and reboot
+# done
 
 # For uefi boot UKI directly disable secure boot and boot order lock:
 # Reboot -> F1 -> Startup -> Boot Order Lock -> Disable
