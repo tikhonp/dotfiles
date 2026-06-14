@@ -80,6 +80,9 @@ git clone https://aur.archlinux.org/paru.git
 (cd paru && makepkg -si --noconfirm)
 rm -rf paru
 
+# Go modules may be not available
+export GOPROXY=https://goproxy.cn,direct
+export GOSUMDB=off
 paru -S --needed --noconfirm google-chrome sing-box
 
 
@@ -89,23 +92,44 @@ mkdir -p ~/src ~/projects/sandbox
 
 # Dotfiles
 
-# Load an SSH key into the agent so we can clone over git@.
+# Pin GitHub's host key up front so the clone never blocks on an interactive
+# yes/no prompt during an unattended run.
+mkdir -p ~/.ssh && chmod 700 ~/.ssh
+if ! ssh-keygen -F github.com >/dev/null 2>&1; then
+    ssh-keyscan -t ed25519 github.com 2>/dev/null >> ~/.ssh/known_hosts
+fi
+
+# Start an agent and guarantee the temp key + agent get torn down on ANY exit.
 eval "$(ssh-agent -s)"
-TEMP_KEY="/tmp/temp_ssh_key_$RANDOM"
-echo "Paste your SSH private key content (end with empty line):"
+TEMP_KEY="$(mktemp)"                       # 0600 from birth
+cleanup() {
+    ssh-add -d "$TEMP_KEY" 2>/dev/null || true
+    rm -f "$TEMP_KEY"
+    ssh-agent -k >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+
+echo "Paste your SSH private key (finish with Ctrl-D on an empty line):"
 cat > "$TEMP_KEY"
-ssh-add "$TEMP_KEY"
+chmod 600 "$TEMP_KEY"                       # belt-and-suspenders
 
-git -C ~/projects clone --recurse-submodules git@github.com:tikhonp/dotfiles.git
+ssh-add "$TEMP_KEY" \
+    || { echo "ERROR: ssh-add rejected the key." >&2; exit 1; }
 
-ssh-add -d "$TEMP_KEY"
-rm -f "$TEMP_KEY"
+git -C ~/projects clone --recurse-submodules git@github.com:tikhonp/dotfiles.git \
+    || { echo "ERROR: dotfiles clone failed — does the key have repo access?" >&2; exit 1; }
 
-# Deploy with stow.
-(cd ~/projects/dotfiles && stow --target="$HOME" . --dotfiles)
+# Done with SSH; tear it down now rather than waiting for script exit.
+cleanup
+trap - EXIT
 
-# Register the custom Sway session for the display manager.
-sudo ln -s /home/tikhon/projects/dotfiles/usr/share/wayland-sessions/dotfiles-sway.desktop \
+# Deploy (guard so we never stow from a missing dir).
+[ -d ~/projects/dotfiles ] \
+    || { echo "ERROR: ~/projects/dotfiles missing after clone." >&2; exit 1; }
+(cd ~/projects/dotfiles && stow --target="$HOME" --dotfiles .)
+
+# Register the custom Sway session (-f so a re-run doesn't choke on an existing link).
+sudo ln -sf /home/tikhon/projects/dotfiles/usr/share/wayland-sessions/dotfiles-sway.desktop \
     /usr/share/wayland-sessions/dotfiles-sway.desktop
 
 
