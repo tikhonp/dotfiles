@@ -13,6 +13,11 @@ set -uo pipefail
 # Larger TTY font for HiDPI.
 sudo sed -i 's/^FONT=.*/FONT=latarcyrheb-sun32/' /etc/vconsole.conf
 
+# pacman: Pac-Man progress bar (ILoveCandy easter egg). Idempotent.
+if ! grep -q '^ILoveCandy' /etc/pacman.conf; then
+    sudo sed -i '/^\[options\]/a ILoveCandy' /etc/pacman.conf
+fi
+
 
 sudo pacman -S --needed --noconfirm \
     base-devel \
@@ -167,3 +172,9 @@ git -C ~/src clone https://github.com/Leadaxe/singbox-launcher.git
     ./build/build_linux.sh
     chmod +x singbox-launcher
 )
+
+# Default login shell -> zsh.
+ZSH_PATH="$(command -v zsh)"
+if [ -n "$ZSH_PATH" ] && [ "$(getent passwd tikhon | cut -d: -f7)" != "$ZSH_PATH" ]; then
+    sudo chsh -s "$ZSH_PATH" tikhon
+fi
