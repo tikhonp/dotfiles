@@ -88,7 +88,7 @@ rm -rf paru
 # Go modules may be not available
 export GOPROXY=https://goproxy.cn,direct
 export GOSUMDB=off
-paru -S --needed --noconfirm google-chrome sing-box
+paru -S --needed --noconfirm google-chrome sing-box jetbrains-toolbox
 
 
 # Directories
