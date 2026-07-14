@@ -32,3 +32,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/tikhonp/dotfiles/refs/he
 #  wpctl status
 #
 # wpctl set-volume 86 1.0
+
+# TAILSCALE
+# disable ts dns so it brokes router's VPNs usually:
+# tailscale up --accept-dns=false --login-server=https://hs...
