@@ -60,7 +60,7 @@ mas "Final Cut Pro", id: 424389933
 mas "Image2Icon", id: 992115977
 mas "JSONPeep", id: 1458969831
 mas "Logic Pro", id: 634148309
-mas "Scrobbles for Last.fm", id: 1344679160
+# mas "Scrobbles for Last.fm", id: 1344679160
 mas "Telegram", id: 747648890
 mas "Vimlike", id: 1584519802
 mas "Wipr", id: 1320666476
