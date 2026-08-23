@@ -25,6 +25,7 @@ alias cdw="rm -rf ~/Downloads/*"
 alias f="fuck"
 alias s="server ssh"
 alias sci="server ssh-copy-id"
+alias scat="cat \"$PRIVATE_SSH_SERVERS_PATH\""
 alias d="/usr/bin/start-sway"
 alias e='$EDITOR'
 alias gs="git status"
