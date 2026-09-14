@@ -14,7 +14,7 @@ brew "tree"
 brew "zsh-autosuggestions"
 brew "tree-sitter"
 brew "tree-sitter-cli"
-brew "anomalyco/tap/opencode"
+brew "opencode"
 
 brew "go"
 brew "pkl"
@@ -29,7 +29,7 @@ brew "pkg-config"
 brew "yt-dlp"
 brew "nmap"
 
-cask "angry-ip-scanner"
+# cask "angry-ip-scanner"
 cask "appcleaner"
 cask "balenaetcher"
 cask "google-chrome"
@@ -38,7 +38,7 @@ cask "kitty"
 cask "sdformatter"
 cask "homebrew/cask/transmission"
 cask "qobuz"
-cask "vox"
+# cask "vox"
 cask "the-unarchiver"
 cask "docker-desktop"
 cask "tailscale-app"
@@ -48,13 +48,13 @@ cask "bitwarden"
 cask "winbox"
 cask "android-studio"
 
-tap "getsentry/tools"
-brew "getsentry/tools/sentry-cli"
+# tap "getsentry/tools"
+# brew "getsentry/tools/sentry-cli"
 
-tap "peripheryapp/periphery"
-cask "periphery"
+# tap "peripheryapp/periphery", trusted: true
+# cask "periphery"
 
-mas "Claquette", id: 587748131
+# mas "Claquette", id: 587748131
 mas "Compressor", id: 424390742
 mas "DevCleaner", id: 1388020431
 mas "Final Cut Pro", id: 424389933

@@ -36,3 +36,5 @@ stow --target=$HOME . --dotfiles
 #  - Softube reverb
 #  - Fabfilter
 #  - Izotope Ozone
+
+# 11. Install Arpeggi app from appstore
