@@ -64,7 +64,8 @@ mas "Logic Pro", id: 634148309
 # mas "Scrobbles for Last.fm", id: 1344679160
 mas "Telegram", id: 747648890
 mas "Vimlike", id: 1584519802
-mas "Wipr", id: 1320666476
+# mas "Wipr", id: 1320666476 
+#   i think this version was deleted from appstore
 mas "Xcode", id: 497799835
 mas "Amphetamine", id: 937984704
 mas "Shadowrocket", id: 932747118
