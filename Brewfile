@@ -31,12 +31,12 @@ brew "nmap"
 
 # cask "angry-ip-scanner"
 cask "appcleaner"
-cask "balenaetcher"
+# cask "balenaetcher"
 cask "google-chrome"
 cask "iina"
 cask "kitty"
 cask "sdformatter"
-cask "homebrew/cask/transmission"
+cask "transmission"
 cask "qobuz"
 # cask "vox"
 cask "the-unarchiver"
@@ -47,6 +47,8 @@ cask "bluos-controller"
 cask "bitwarden"
 cask "winbox"
 cask "android-studio"
+cask "datagrip"
+cask "orcaslicer"
 
 # tap "getsentry/tools"
 # brew "getsentry/tools/sentry-cli"
@@ -58,7 +60,7 @@ cask "android-studio"
 mas "Compressor", id: 424390742
 mas "DevCleaner", id: 1388020431
 mas "Final Cut Pro", id: 424389933
-mas "Image2Icon", id: 992115977
+# mas "Image2Icon", id: 992115977
 mas "JSONPeep", id: 1458969831
 mas "Logic Pro", id: 634148309
 # mas "Scrobbles for Last.fm", id: 1344679160
