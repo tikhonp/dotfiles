@@ -48,7 +48,7 @@ cask "bitwarden"
 cask "winbox"
 cask "android-studio"
 cask "datagrip"
-# cask "orcaslicer"
+cask "orcaslicer"
 cask "creality-print"
 
 # tap "getsentry/tools"
