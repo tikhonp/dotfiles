@@ -15,6 +15,7 @@ brew "zsh-autosuggestions"
 brew "tree-sitter"
 brew "tree-sitter-cli"
 brew "opencode"
+brew "btop"
 
 brew "go"
 brew "pkl"
