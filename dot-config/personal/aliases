@@ -6,7 +6,7 @@ alias v='$VIM'
 
 alias msync="rsync -rvaE --progress --delete"
 
-alias ls='ls --color '
+alias ls='ls --color=auto '
 alias l='ls -lh '   
 alias la='ls -lAh '
 
