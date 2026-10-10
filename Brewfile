@@ -51,6 +51,7 @@ cask "android-studio"
 cask "datagrip"
 cask "orcaslicer"
 cask "creality-print"
+cask "obs"
 
 # tap "getsentry/tools"
 # brew "getsentry/tools/sentry-cli"
