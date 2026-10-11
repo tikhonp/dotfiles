@@ -1,6 +1,6 @@
 [submodule "dot-config/nvim"]
 	path = dot-config/nvim
-	url = ssh://git@git.tikhonnnnn.com:2222/tikhon/neovimrc.git
+	url = ssh://git@code.tikhonnnnn.com/tikhon/neovimrc.git
 [submodule "dot-config/local"]
 	path = dot-config/local
-	url = ssh://git@git.tikhonnnnn.com:2222/tikhon/dot-personal.git
+	url = ssh://git@code.tikhonnnnn.com/tikhon/dot-personal.git
