@@ -1,16 +1,25 @@
 #!/usr/bin/env bash
 
-url=$(git config remote.origin.url | sed "s/git@\(.*\):\(.*\).git/https:\/\/\1\/\2/")/tree/$(git symbolic-ref --quiet --short HEAD )
-if [ -z "$url" ]; then
-    echo "Error: Not a git repository"
-    return 1
+remote=$(git config remote.origin.url)
+if [ -z "$remote" ]; then
+    echo "Error: No origin remote"
+    exit 1
 fi
+# ssh://[user@]host[:port]/path, user@host:path and https URLs -> https://host/path
+url=$(echo "$remote" | sed -E \
+    -e 's#^ssh://([^@/]+@)?([^/:]+)(:[0-9]+)?/#https://\2/#' \
+    -e 's#^[^@/]+@([^:/]+):#https://\1/#' \
+    -e 's#\.git$##')
+case "$url" in
+    https://code.tikhonnnnn.com/* | https://codeberg.org/*) branch_path=src/branch ;;
+    *) branch_path=tree ;;
+esac
+url=$url/$branch_path/$(git symbolic-ref --quiet --short HEAD)
 if command -v xdg-open &> /dev/null; then
     xdg-open "$url"
 elif command -v open &> /dev/null; then
     open "$url"
 else
     echo "Error: No command to open browser"
-    return 1
+    exit 1
 fi
-
