@@ -53,6 +53,7 @@ cask "orcaslicer"
 cask "creality-print"
 cask "obs"
 cask "freecad"
+cask "focusrite-control"
 
 # tap "getsentry/tools"
 # brew "getsentry/tools/sentry-cli"
